@@ -14,7 +14,7 @@ public:
   ulong info_offset;
   ushort info_length;
 
-  ulong setup_offs;
+  ulong setup_offset;
   ushort setup_length;
 
   ulong data_offset; //offset to the first data block

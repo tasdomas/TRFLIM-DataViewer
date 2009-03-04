@@ -1,18 +1,13 @@
 #include <iostream>
 #include <fstream>
 
-#include "../fileformat/fileformat.h"
+#include "../fileformat/sdt.h"
 
 using namespace std;
 
 int main() {
-  FileHeader fh;
 
-  fstream sdt("data/test-skin.sdt",ios::binary|ios::in);
-  
-  sdt >> fh;
-
-  cout << fh.data_count;
+  SDT data("data/test-skin.sdt");
 
   return 0;
 }

@@ -9,7 +9,11 @@ SDT::SDT(string fname) {
   in.seekg(header.info_offset, ios::beg);
   in.read(file_info, header.info_length);
 
-  cout << file_info;
+  setup = (char*)calloc(1, header.setup_length);
+  in.seekg(header.setup_offset, ios::beg);
+  in.read(setup, header.setup_length);
+
+  cout << setup;
 }
 
 SDT::~SDT() {

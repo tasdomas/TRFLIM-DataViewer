@@ -4,7 +4,7 @@ LIBFLAGS = -lm
 
 LIBRARIES = main/ fileformat/
 
-FILEFORMAT_OBJECTS = fileformat/fileformat.o
+FILEFORMAT_OBJECTS = fileformat/fileformat.o fileformat/sdt.o
 
 MAIN_OBJECTS = main/main.o
 

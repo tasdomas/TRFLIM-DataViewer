@@ -17,5 +17,6 @@ class SDT {
   protected:
     FileHeader header;
     char * file_info;
+    char * setup;
 };
 #endif
