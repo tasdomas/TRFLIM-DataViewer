@@ -12,7 +12,7 @@ int main() {
   
   sdt >> fh;
 
-  cout << hex << fh.revision;
+  cout << fh.data_count;
 
   return 0;
 }
