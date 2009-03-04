@@ -1,0 +1,9 @@
+Kas yra kas.
+
+page1..4.bmp yra integruoto intensyvumo vaizdeliai is pacios programos. Jei noretum pasitikrint.
+
+test-skin.sdt yra programos darbinis failas
+
+test-skin.asc yra eksportuota ASCII medziaga. Parinkta 1 verte eiluteje. Glaudumo ar dar kieno sumetimais gali buti ir daugiau, jei tik reikia.
+
+bh-files.pdf yra SDT failu specifikacija kaip ja pavyko nuskenuot is storos knygos, jei ko neiskaitysi, na tai teks uzeit <:
