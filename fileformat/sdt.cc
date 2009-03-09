@@ -20,10 +20,16 @@ SDT::SDT(string fname) {
     in.seekg(offs, ios::beg);
     in >> data_headers[i];
     offs = data_headers[i].next_block_offset;
-    cout << data_headers[i].block_length << endl;
   }
 
-  cout << "*" << endl;
+  //load measurement description blocks
+  meas_blocks = new MeasurementDescriptionBlock[header.meas_desc_count];
+  for (int i = 0; i < header.meas_desc_count; i++) {
+    in.seekg(header.meas_desc_offset + header.meas_desc_length * i, ios::beg);
+    in >> meas_blocks[i];
+  }
+
+  cout << meas_blocks[0].adc_re << endl;
 }
 
 SDT::~SDT() {
@@ -36,6 +42,11 @@ SDT::~SDT() {
   if (data_headers != NULL) {
     delete [] data_headers;
     data_headers = NULL;
+  }
+  
+  if (meas_blocks != NULL) {
+    delete [] meas_blocks;
+    meas_blocks = NULL;
   }
 
 }

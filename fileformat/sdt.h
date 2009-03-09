@@ -20,5 +20,6 @@ class SDT {
     char * setup;
 
     DataBlockHeader * data_headers;
+    MeasurementDescriptionBlock * meas_blocks;
 };
 #endif
