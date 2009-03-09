@@ -2,7 +2,7 @@
 
 SDT::SDT(string fname) {
   fstream in(fname.c_str(), ios::binary | ios::in);
-
+  in.seekg(0);
   in >> header;
 
   file_info = (char*)calloc(1, header.info_length+1);
@@ -13,8 +13,29 @@ SDT::SDT(string fname) {
   in.seekg(header.setup_offset, ios::beg);
   in.read(setup, header.setup_length);
 
-  cout << setup;
+  data_headers = NULL;
+  data_headers = new DataBlockHeader[header.data_count];
+  ulong offs = header.data_offset;
+  for (int i = 0; i < header.data_count; i++) {
+    in.seekg(offs, ios::beg);
+    in >> data_headers[i];
+    offs = data_headers[i].next_block_offset;
+    cout << data_headers[i].block_length << endl;
+  }
+
+  cout << "*" << endl;
 }
 
 SDT::~SDT() {
+  free(file_info);
+  file_info = NULL;
+ 
+  free(setup);
+  setup = NULL;
+
+  if (data_headers != NULL) {
+    delete [] data_headers;
+    data_headers = NULL;
+  }
+
 }

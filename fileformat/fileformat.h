@@ -33,4 +33,16 @@ public:
   friend istream& operator >>(istream &is, FileHeader &obj);
 };
 
+class DataBlockHeader {
+public:
+  short block_no;
+  long data_offset;
+  long next_block_offset;
+  ushort block_type;
+  short meas_desc_no; //number of the measurement description block
+  ulong lblock_no;
+  ulong block_length;
+  friend istream& operator >>(istream &is, DataBlockHeader &obj);
+};
+
 #endif

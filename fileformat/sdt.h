@@ -18,5 +18,7 @@ class SDT {
     FileHeader header;
     char * file_info;
     char * setup;
+
+    DataBlockHeader * data_headers;
 };
 #endif
