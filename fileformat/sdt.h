@@ -19,6 +19,8 @@ class SDT {
     char * file_info;
     char * setup;
 
+    ushort ** data_blocks;
+
     DataBlockHeader * data_headers;
     MeasurementDescriptionBlock * meas_blocks;
 };

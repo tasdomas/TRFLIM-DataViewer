@@ -7,6 +7,8 @@
 #include <iostream>
 using namespace std;
 
+ushort rd_sh (istream &is);
+
 class FileHeader {
 public:
   ushort revision;

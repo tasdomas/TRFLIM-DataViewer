@@ -13,13 +13,19 @@ SDT::SDT(string fname) {
   in.seekg(header.setup_offset, ios::beg);
   in.read(setup, header.setup_length);
 
-  data_headers = NULL;
+  data_blocks = new ushort*[header.data_count];
   data_headers = new DataBlockHeader[header.data_count];
   ulong offs = header.data_offset;
   for (int i = 0; i < header.data_count; i++) {
     in.seekg(offs, ios::beg);
     in >> data_headers[i];
     offs = data_headers[i].next_block_offset;
+
+    data_blocks[i] = new ushort[data_headers[i].block_length / 2];
+    in.seekg(data_headers[i].data_offset, ios::beg);
+    for (int j = 0; j < data_headers[i].block_length / 2; j++) {
+      data_blocks[i][j] = rd_sh(in);
+    }
   }
 
   //load measurement description blocks
@@ -47,6 +53,16 @@ SDT::~SDT() {
   if (meas_blocks != NULL) {
     delete [] meas_blocks;
     meas_blocks = NULL;
+  }
+
+  if (data_blocks != NULL) {
+    /*
+    for (int i = 0; i < header.data_count; i++) {
+      delete [] data_blocks[i];
+    }
+    */
+    delete [] data_blocks;
+    data_blocks = NULL;
   }
 
 }
