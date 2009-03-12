@@ -14,14 +14,24 @@ MainFrame::MainFrame()
 
     SetSizer( sizer );
 
-    image = new wxImage(1000, 1000, true);
-    for (int i = 0; i < 1000; i++) {
-      for (int j = 0; j <= 1000; j++) {
-        if (i < j) {
-          image->SetRGB(i,j, 0, 0, 0);
-        } else {
-          image->SetRGB(i,j, 50, 20, 20);
+    SDT data("data/test-skin.sdt");
+
+    ushort * datab = data.GetDataBlock(3);
+
+    image = new wxImage(1024, 1024, true);
+    ushort max = 0;
+    for (int i = 0; i < 1024; i++) {
+      for (int j = 0; j <= 1024; j++) {
+        ushort curr = datab[i*1024 + j];
+        if (curr > max) {
+          max = curr;
         }
+      }
+    }
+    for (int i = 0; i < 1024; i++) {
+      for (int j = 0; j <= 1024; j++) {
+        ushort curr = (datab[i*1024 + j] * 255) / max;
+        image->SetRGB(i,j, curr, curr, curr);
       }
     }
 

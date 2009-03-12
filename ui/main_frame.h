@@ -3,6 +3,7 @@
 
 #include "wx/wx.h"
 #include "canvas.h"
+#include "../fileformat/sdt.h"
 
 class MainFrame : public wxFrame {
   protected:

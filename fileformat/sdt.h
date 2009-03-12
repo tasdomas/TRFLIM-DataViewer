@@ -14,6 +14,8 @@ class SDT {
     SDT(string fname);
     ~SDT();
 
+    ushort * GetDataBlock(int i = 0);
+
   protected:
     FileHeader header;
     char * file_info;

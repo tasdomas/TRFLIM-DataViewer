@@ -66,3 +66,10 @@ SDT::~SDT() {
   }
 
 }
+
+ushort * SDT::GetDataBlock(int i) {
+  if (i < header.data_count) {
+    return data_blocks[i];
+  }
+
+}

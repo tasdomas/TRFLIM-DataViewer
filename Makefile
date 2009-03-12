@@ -2,13 +2,18 @@ COMPILER = g++
 CCFLAGS = -g -ansi
 LIBFLAGS = -lm
 
-LIBRARIES = main/ fileformat/
+WX_LIBS = $(shell wx-config --libs)
+WX_CXXFLAGS = $(shell wx-config --cxxflags)
+
+LIBRARIES = main/ fileformat/ ui/
 
 FILEFORMAT_OBJECTS = fileformat/fileformat.o fileformat/sdt.o
 
 MAIN_OBJECTS = main/main.o
 
-OBJECTS = $(FILEFORMAT_OBJECTS) $(MAIN_OBJECTS)
+UI_OBJECTS = ui/canvas.o ui/main_frame.o
+
+OBJECTS = $(FILEFORMAT_OBJECTS) $(UI_OBJECTS)
 
 .PHONY: all $(LIBRARIES)
 
@@ -19,6 +24,10 @@ all: test
 
 test: $(LIBRARIES) 
 	$(COMPILER) $(LIBFLAGS) -o $@ $(OBJECTS)
+
+dv: $(LIBRARIES)
+	$(COMPILER) $(WX_LIBS) $(LIBFLAGS) -o $@ $(OBJECTS) ui/app.o
+
 
 $(LIBRARIES) :
 	$(MAKE) --directory=$@
