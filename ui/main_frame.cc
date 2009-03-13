@@ -16,26 +16,35 @@ MainFrame::MainFrame()
 
     SDT data("data/test-skin.sdt");
 
-    ushort * datab = data.GetDataBlock(3);
+    ushort ** datab = data.ReformatBlocks();
+    int x = data.GetSetupParam("SP_SCAN_X");
+    int y = data.GetSetupParam("SP_SCAN_Y");
+    int adc = data.GetSetupParam("SP_ADC_RE");
 
-    image = new wxImage(1024, 1024, true);
+    int c_adc = 190;
+
+    image = new wxImage(x, y, true);
     ushort max = 0;
-    for (int i = 0; i < 1024; i++) {
-      for (int j = 0; j <= 1024; j++) {
-        ushort curr = datab[i*1024 + j];
+    for (int i = 0; i < x; i++) {
+      for (int j = 0; j < y; j++) {
+        ushort curr = datab[i + j*x][c_adc];
         if (curr > max) {
           max = curr;
         }
       }
     }
-    for (int i = 0; i < 1024; i++) {
-      for (int j = 0; j <= 1024; j++) {
-        ushort curr = (datab[i*1024 + j] * 255) / max;
+    if (max == 0) {
+      max = 1;
+    }
+    for (int i = 0; i < x; i++) {
+      for (int j = 0; j < y; j++) {
+        ushort curr = (datab[i + j*x][c_adc] * 255) / max;
         image->SetRGB(i,j, curr, curr, curr);
       }
     }
-
-    canvas->SetImage(*image);
+    
+    wxImage * t = new wxImage(image->Scale(x*4, y*4));
+    canvas->SetImage(*t);
 
     sizer->SetSizeHints(this);
 

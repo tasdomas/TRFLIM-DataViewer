@@ -23,7 +23,7 @@ OBJECTS = $(FILEFORMAT_OBJECTS) $(UI_OBJECTS)
 all: test
 
 test: $(LIBRARIES) 
-	$(COMPILER) $(LIBFLAGS) -o $@ $(OBJECTS)
+	$(COMPILER) $(LIBFLAGS) -o $@ $(FILEFORMAT_OBJECTS) main/main.o
 
 dv: $(LIBRARIES)
 	$(COMPILER) $(WX_LIBS) $(LIBFLAGS) -o $@ $(OBJECTS) ui/app.o

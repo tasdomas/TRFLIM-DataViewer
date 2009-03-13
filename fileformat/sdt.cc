@@ -67,9 +67,43 @@ SDT::~SDT() {
 
 }
 
+int SDT::GetSetupParam(string param) {
+  char * pos = strstr(setup, param.c_str());
+
+  pos += param.length() + 3;
+
+  int out = 0;
+
+  while (*pos != ']') {
+    out = out * 10 + (*pos - 48);
+    pos++;
+  }
+  
+  return out;
+}
+
 ushort * SDT::GetDataBlock(int i) {
   if (i < header.data_count) {
     return data_blocks[i];
   }
 
+}
+
+ushort ** SDT::ReformatBlocks() {
+  int size_x = GetSetupParam("SP_SCAN_X");
+  int adc_re = GetSetupParam("SP_ADC_RE");
+  int size_y = GetSetupParam("SP_SCAN_Y");
+
+  ushort ** block = new ushort*[size_x*size_y];
+
+  ushort * dat = data_blocks[0];
+  
+  for (int j = 0; j < size_x * size_y; j++) {
+    ushort * adc = new ushort[adc_re];
+    for (int i = 0; i < adc_re; i++) {
+      adc[i] = dat[i + j*adc_re];
+    }
+    block[j] = adc;
+  }
+  return block;
 }

@@ -3,6 +3,7 @@
 
 #include "fileformat.h"
 
+#include <string.h>
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -13,8 +14,10 @@ class SDT {
   public:
     SDT(string fname);
     ~SDT();
-
+    int GetSetupParam(string param);
     ushort * GetDataBlock(int i = 0);
+
+    ushort ** ReformatBlocks();
 
   protected:
     FileHeader header;
