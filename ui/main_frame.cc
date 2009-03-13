@@ -43,8 +43,8 @@ MainFrame::MainFrame()
       }
     }
     
-    wxImage * t = new wxImage(image->Scale(x*4, y*4));
-    canvas->SetImage(*t);
+    image->Rescale(x*4, y*4);
+    canvas->SetImage(*image);
 
     sizer->SetSizeHints(this);
 
