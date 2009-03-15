@@ -2,11 +2,13 @@
 #define DV_SDT
 
 #include "fileformat.h"
+#include "datablock.h"
 
 #include <string.h>
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <vector>
 
 using namespace std;
 
@@ -15,16 +17,14 @@ class SDT {
     SDT(string fname);
     ~SDT();
     int GetSetupParam(string param);
-    ushort * GetDataBlock(int i = 0);
-
-    ushort ** ReformatBlocks();
+    DataBlock * GetDataBlock(int i = 0);
 
   protected:
     FileHeader header;
     char * file_info;
     char * setup;
 
-    ushort ** data_blocks;
+    vector<DataBlock> data;
 
     DataBlockHeader * data_headers;
     MeasurementDescriptionBlock * meas_blocks;

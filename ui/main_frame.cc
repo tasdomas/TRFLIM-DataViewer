@@ -16,18 +16,20 @@ MainFrame::MainFrame()
 
     SDT data("data/test-skin.sdt");
 
-    ushort ** datab = data.ReformatBlocks();
+    DataBlock * datab = data.GetDataBlock(0);
     int x = data.GetSetupParam("SP_SCAN_X");
     int y = data.GetSetupParam("SP_SCAN_Y");
     int adc = data.GetSetupParam("SP_ADC_RE");
 
     int c_adc = 190;
 
+    ushort * block = datab->GetImage(c_adc);
+
     image = new wxImage(x, y, true);
     ushort max = 0;
     for (int i = 0; i < x; i++) {
       for (int j = 0; j < y; j++) {
-        ushort curr = datab[i + j*x][c_adc];
+        ushort curr = block[i + j*x];
         if (curr > max) {
           max = curr;
         }
@@ -38,7 +40,7 @@ MainFrame::MainFrame()
     }
     for (int i = 0; i < x; i++) {
       for (int j = 0; j < y; j++) {
-        ushort curr = (datab[i + j*x][c_adc] * 255) / max;
+        ushort curr = (block[i + j*x] * 255) / max;
         image->SetRGB(i,j, curr, curr, curr);
       }
     }

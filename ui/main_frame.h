@@ -4,6 +4,7 @@
 #include "wx/wx.h"
 #include "canvas.h"
 #include "../fileformat/sdt.h"
+#include "../fileformat/datablock.h"
 
 class MainFrame : public wxFrame {
   protected:

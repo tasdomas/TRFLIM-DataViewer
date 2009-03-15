@@ -7,7 +7,7 @@ WX_CXXFLAGS = $(shell wx-config --cxxflags)
 
 LIBRARIES = main/ fileformat/ ui/
 
-FILEFORMAT_OBJECTS = fileformat/fileformat.o fileformat/sdt.o
+FILEFORMAT_OBJECTS = fileformat/fileformat.o fileformat/sdt.o fileformat/datablock.o
 
 MAIN_OBJECTS = main/main.o
 

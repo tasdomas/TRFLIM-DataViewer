@@ -13,7 +13,6 @@ SDT::SDT(string fname) {
   in.seekg(header.setup_offset, ios::beg);
   in.read(setup, header.setup_length);
 
-  data_blocks = new ushort*[header.data_count];
   data_headers = new DataBlockHeader[header.data_count];
   ulong offs = header.data_offset;
   for (int i = 0; i < header.data_count; i++) {
@@ -21,11 +20,19 @@ SDT::SDT(string fname) {
     in >> data_headers[i];
     offs = data_headers[i].next_block_offset;
 
-    data_blocks[i] = new ushort[data_headers[i].block_length / 2];
+    ushort * data_block = new ushort[data_headers[i].block_length / 2];
     in.seekg(data_headers[i].data_offset, ios::beg);
     for (int j = 0; j < data_headers[i].block_length / 2; j++) {
-      data_blocks[i][j] = rd_sh(in);
+      data_block[j] = rd_sh(in);
     }
+    DataBlock img(data_block, 
+        data_headers[i].block_length / 2, 
+        GetSetupParam("SP_SCAN_X"),
+        GetSetupParam("SP_SCAN_Y"),
+        GetSetupParam("SP_ADC_RE"));
+
+    data.push_back(img);
+    delete [] data_block;
   }
 
   //load measurement description blocks
@@ -55,15 +62,7 @@ SDT::~SDT() {
     meas_blocks = NULL;
   }
 
-  if (data_blocks != NULL) {
-    /*
-    for (int i = 0; i < header.data_count; i++) {
-      delete [] data_blocks[i];
-    }
-    */
-    delete [] data_blocks;
-    data_blocks = NULL;
-  }
+  data.clear();
 
 }
 
@@ -82,28 +81,10 @@ int SDT::GetSetupParam(string param) {
   return out;
 }
 
-ushort * SDT::GetDataBlock(int i) {
+DataBlock * SDT::GetDataBlock(int i) {
   if (i < header.data_count) {
-    return data_blocks[i];
+    return &data[i];
   }
 
 }
 
-ushort ** SDT::ReformatBlocks() {
-  int size_x = GetSetupParam("SP_SCAN_X");
-  int adc_re = GetSetupParam("SP_ADC_RE");
-  int size_y = GetSetupParam("SP_SCAN_Y");
-
-  ushort ** block = new ushort*[size_x*size_y];
-
-  ushort * dat = data_blocks[0];
-  
-  for (int j = 0; j < size_x * size_y; j++) {
-    ushort * adc = new ushort[adc_re];
-    for (int i = 0; i < adc_re; i++) {
-      adc[i] = dat[i + j*adc_re];
-    }
-    block[j] = adc;
-  }
-  return block;
-}
