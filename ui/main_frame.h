@@ -13,6 +13,11 @@ class MainFrame : public wxFrame {
   public:
     MainFrame();
 
+    void OnQuit(wxCommandEvent&);
+    void OnLoad(wxCommandEvent&);
+  private:
+    DECLARE_EVENT_TABLE()
+
 };
 
 #endif

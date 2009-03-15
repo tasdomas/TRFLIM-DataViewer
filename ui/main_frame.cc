@@ -1,7 +1,29 @@
 #include "main_frame.h"
 
+enum {
+  ID_Quit = 1,
+  ID_Load
+};
+
+BEGIN_EVENT_TABLE(MainFrame, wxFrame) 
+  EVT_MENU(ID_Quit, MainFrame::OnQuit)
+  EVT_MENU(ID_Load, MainFrame::OnLoad)
+END_EVENT_TABLE()
+
 MainFrame::MainFrame() 
   : wxFrame(NULL, wxID_ANY, _("DV"), wxDefaultPosition) {
+    //the menu
+    wxMenu * menuData = new wxMenu;
+
+    menuData->Append( ID_Load, _("&Load.."));
+    menuData->AppendSeparator();
+    menuData->Append( ID_Quit, _("E&xit"));
+
+    wxMenuBar *menu = new wxMenuBar;
+    menu->Append( menuData, _("&Data"));
+
+    SetMenuBar(menu);
+    
     wxBoxSizer * sizer = new wxBoxSizer(wxVERTICAL);
     
     //canvas for displaying images
@@ -52,3 +74,13 @@ MainFrame::MainFrame()
 
     Centre();
 }
+
+void MainFrame::OnQuit(wxCommandEvent &evt) {
+  delete image;
+  delete canvas;
+  Close(TRUE);
+}
+
+void MainFrame::OnLoad(wxCommandEvent &evt) {
+}
+
