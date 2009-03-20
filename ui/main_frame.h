@@ -3,6 +3,7 @@
 
 #include "wx/wx.h"
 #include "canvas.h"
+#include "datapanel.h"
 #include "../fileformat/sdt.h"
 #include "../fileformat/datablock.h"
 
@@ -10,6 +11,11 @@ class MainFrame : public wxFrame {
   protected:
     wxImage * image;
     DVCanvas * canvas;
+    DataPanel * dataPanel;
+
+    SDT * dataFile;
+
+    void UpdateSDT();
   public:
     MainFrame();
 
