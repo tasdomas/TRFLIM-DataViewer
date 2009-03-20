@@ -6,7 +6,8 @@ enum {
 };
 
 DataPanel::DataPanel(wxWindow * parent, wxWindowID id)
-  : wxPanel(parent, id) {
+  : wxPanel(parent, id),
+    setupData("") {
   
   wxBoxSizer * sizer = new wxBoxSizer(wxVERTICAL);
   
@@ -32,4 +33,15 @@ DataPanel::DataPanel(wxWindow * parent, wxWindowID id)
 DataPanel::~DataPanel() {
 }
 
-  
+void DataPanel::UpdateData(string pFileName, int pBlockCount, string pSetupData) {
+  // get only the filename
+  int pos = pFileName.find_last_of("/\\");
+  string name = pFileName;
+  if (pos != string::npos) {
+    name = pFileName.substr(pos+1);
+  }
+
+  fileName->SetLabel(wxString(name.c_str(), wxConvUTF8));
+  blockNo->SetRange(0, pBlockCount);
+  setupData = pSetupData;
+}

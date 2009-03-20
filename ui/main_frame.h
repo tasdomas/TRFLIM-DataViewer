@@ -15,7 +15,7 @@ class MainFrame : public wxFrame {
 
     SDT * dataFile;
 
-    void UpdateSDT();
+    void UpdateSDT(string fileName = "");
   public:
     MainFrame();
 

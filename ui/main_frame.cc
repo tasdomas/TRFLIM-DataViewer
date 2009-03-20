@@ -70,11 +70,14 @@ void MainFrame::OnLoad(wxCommandEvent &evt) {
 
     string file = std::string(filename.mb_str()); 
     dataFile = new SDT(file);
-    UpdateSDT();
+    UpdateSDT(std::string(filename.mb_str()));
   }
 }
 
-void MainFrame::UpdateSDT() {
+void MainFrame::UpdateSDT(string fileName) {
+  dataPanel->UpdateData(fileName, dataFile->GetBlockCount(), dataFile->GetSetupData());
+
+
   DataBlock * datab = dataFile->GetDataBlock(0);
   int x = dataFile->GetSetupParam("SP_SCAN_X");
   int y = dataFile->GetSetupParam("SP_SCAN_Y");

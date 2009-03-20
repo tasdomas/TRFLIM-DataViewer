@@ -88,3 +88,10 @@ DataBlock * SDT::GetDataBlock(int i) {
 
 }
 
+int SDT::GetBlockCount() {
+  return (int)header.data_count;
+}
+
+string SDT::GetSetupData() {
+  return string(setup);
+}

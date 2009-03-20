@@ -18,6 +18,8 @@ class SDT {
     ~SDT();
     int GetSetupParam(string param);
     DataBlock * GetDataBlock(int i = 0);
+    int GetBlockCount();
+    string GetSetupData();
 
   protected:
     FileHeader header;
