@@ -11,7 +11,7 @@ FILEFORMAT_OBJECTS = fileformat/fileformat.o fileformat/sdt.o fileformat/datablo
 
 MAIN_OBJECTS = main/main.o
 
-UI_OBJECTS = ui/canvas.o ui/main_frame.o ui/datapanel.o
+UI_OBJECTS = ui/canvas.o ui/main_frame.o ui/datapanel.o ui/imagepanel.o
 
 OBJECTS = $(FILEFORMAT_OBJECTS) $(UI_OBJECTS)
 

@@ -2,15 +2,19 @@
 #define DV_MAIN_FRAME_H
 
 #include "wx/wx.h"
+#include "wx/notebook.h"
+
 #include "canvas.h"
 #include "datapanel.h"
+#include "imagepanel.h"
+
 #include "../fileformat/sdt.h"
 #include "../fileformat/datablock.h"
 
 class MainFrame : public wxFrame {
   protected:
     wxImage * image;
-    DVCanvas * canvas;
+    wxNotebook * book;
     DataPanel * dataPanel;
 
     SDT * dataFile;

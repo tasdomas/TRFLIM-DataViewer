@@ -7,7 +7,7 @@ WX_LIBS = $(shell wx-config --libs)
 INCLUDES = 
 WX_CXXFLAGS = -g $(shell wx-config --cxxflags)
 
-OBJECTS = app.o main_frame.o canvas.o datapanel.o
+OBJECTS = app.o main_frame.o canvas.o datapanel.o imagepanel.o
 
 # implementation
 

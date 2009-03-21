@@ -6,7 +6,7 @@
 class DVCanvas : public wxScrolledWindow {
 public:
   DVCanvas(wxWindow * parent, wxWindowID id, 
-      const wxPoint & pos, const wxSize & size);
+      const wxPoint & pos = wxDefaultPosition, const wxSize & size = wxDefaultSize);
 
   ~DVCanvas();
 

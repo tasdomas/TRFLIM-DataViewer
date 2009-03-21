@@ -28,15 +28,14 @@ MainFrame::MainFrame()
     wxBoxSizer * sizer = new wxBoxSizer(wxHORIZONTAL);
     
     //canvas for displaying images
-    canvas = new DVCanvas(
-        this, 
-        wxID_ANY, 
-        wxDefaultPosition, 
-        wxSize(250, 250));
-    sizer->Add(canvas, 1, wxEXPAND, 0);
+    book = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxSize(200, 200), wxNB_TOP);
+
+    book->AddPage(new ImagePanel(book, wxID_ANY, TRUE), _("Raw"), true);
+
+    sizer->Add(book, 1, wxEXPAND, 0);
     
     dataPanel = new DataPanel(this);
-    sizer->Add(dataPanel, 0.11, wxEXPAND, 0);
+    sizer->Add(dataPanel, 0.1, wxEXPAND, 0);
     
     SetSizer( sizer );
 
@@ -46,8 +45,6 @@ MainFrame::MainFrame()
 }
 
 void MainFrame::OnQuit(wxCommandEvent &evt) {
-  delete image;
-  delete canvas;
   Close(TRUE);
 }
 
@@ -77,7 +74,7 @@ void MainFrame::OnLoad(wxCommandEvent &evt) {
 void MainFrame::UpdateSDT(string fileName) {
   dataPanel->UpdateData(fileName, dataFile->GetBlockCount(), dataFile->GetSetupData());
 
-
+  /*
   DataBlock * datab = dataFile->GetDataBlock(0);
   int x = dataFile->GetSetupParam("SP_SCAN_X");
   int y = dataFile->GetSetupParam("SP_SCAN_Y");
@@ -109,4 +106,5 @@ void MainFrame::UpdateSDT(string fileName) {
   image->Rescale(x*4, y*4);
   canvas->SetImage(*image);
   canvas->Refresh();
+  */
 }
