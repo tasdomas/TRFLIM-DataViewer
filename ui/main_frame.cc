@@ -63,6 +63,7 @@ void MainFrame::OnLoad(wxCommandEvent &evt) {
     this
   ); 
   if (! filename.empty()) {
+    wxBeginBusyCursor();
     if (dataFile != NULL) {
       delete dataFile;
     }
@@ -70,6 +71,7 @@ void MainFrame::OnLoad(wxCommandEvent &evt) {
     string file = std::string(filename.mb_str()); 
     dataFile = new SDT(file);
     UpdateSDT(std::string(filename.mb_str()));
+    wxEndBusyCursor();
   }
 }
 
