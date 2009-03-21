@@ -1,3 +1,6 @@
 *.o
 test
 rfc/*
+*~
+dv
+ui/dv_ui
