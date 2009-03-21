@@ -23,6 +23,17 @@ DataBlock::DataBlock(ushort * data, int size, int scan_x, int scan_y, int adc_re
   size_z = adc_res;
 }
 
+DataBlock::DataBlock(int scan_x, int scan_y, int adc_res) {
+  block = new ushort*[adc_res];
+  for (int i = 0; i < adc_res; i++) {
+    block[i] = new ushort[scan_x*scan_y];
+  }
+
+  size_x = scan_x;
+  size_y = scan_y;
+  size_z = adc_res;
+}
+
 DataBlock::DataBlock(const DataBlock & origin) {
   block = new ushort*[origin.size_z];
   size_x = origin.size_x;
@@ -64,7 +75,7 @@ DataBlock::~DataBlock() {
 }
 
 ushort * DataBlock::GetImage(int z) {
-  if ((z > 0) && (z < size_z)) {
+  if ((z >= 0) && (z < size_z)) {
     return block[z];
   } else {
     return NULL;
@@ -82,4 +93,16 @@ int DataBlock::GetY() {
 
 int DataBlock::GetZ() {
   return size_z;
+}
+
+void DataBlock::SetData(ushort * data, int size) {
+  if (size_x * size_y * size_z == size) {
+    for (int j = 0; j < size_z; j++) {
+      //going through all the adc points
+      for (int i = 0; i < size_x * size_y; i++) {
+        //all the image points
+        block[j][i] = data[j + i*size_z];
+      }
+    }
+  }
 }

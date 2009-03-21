@@ -16,6 +16,7 @@ class MainFrame : public wxFrame {
     wxImage * image;
     wxNotebook * book;
     DataPanel * dataPanel;
+    ImagePanel * rawPanel;
 
     SDT * dataFile;
 

@@ -7,8 +7,13 @@ enum {
   ID_Slide
 };
 
+BEGIN_EVENT_TABLE(ImagePanel, wxPanel)
+EVT_COMMAND_SCROLL(ID_Slide, ImagePanel::OnSlide)
+END_EVENT_TABLE()
+
 ImagePanel::ImagePanel(wxWindow * parent, wxWindowID id, bool multiImage) 
-  : wxPanel(parent, id, wxDefaultPosition, wxSize(250, 250)) {
+: wxPanel(parent, id, wxDefaultPosition),
+  block(NULL) {
 
   wxBoxSizer * sizer = new wxBoxSizer(wxHORIZONTAL);
 
@@ -19,11 +24,11 @@ ImagePanel::ImagePanel(wxWindow * parent, wxWindowID id, bool multiImage)
 
   if (multiImage) {
     scroller = new wxScrollBar(this, ID_Slide);
-    sizerLeft->Add(scroller, 0, wxEXPAND);
+    sizerLeft->Add(scroller, 0.1, wxEXPAND);
   }
 
   sizer->Add(sizerLeft, 1, wxEXPAND);
-  /*
+  
   wxBoxSizer * sizerRight = new wxBoxSizer(wxVERTICAL);
   
   wxButton * btn = new wxButton(this, ID_ZoomIn, _("+"));
@@ -36,10 +41,28 @@ ImagePanel::ImagePanel(wxWindow * parent, wxWindowID id, bool multiImage)
   sizerRight->Add(btn, 0);
 
   sizer->Add(sizerRight, 0);
-  */
-  SetSizer(sizerLeft);
-  sizerLeft->SetSizeHints(this);
+  
+  SetSizer(sizer);
+  sizer->SetSizeHints(this);
 }
 
 ImagePanel::~ImagePanel() {
 }
+
+void ImagePanel::SetImage(DataBlock * image) {
+  block = image;
+
+  scroller->SetScrollbar(0, 1, image->GetZ() - 1, 1);
+
+  canvas->SetImage(block->GetImage(0), block->GetX(), block->GetY());
+  canvas->Refresh();
+}
+
+void ImagePanel::OnSlide(wxScrollEvent & evt) {
+  if (block != NULL) {
+    int pos = evt.GetPosition();
+    canvas->SetImage(block->GetImage(pos), block->GetX(), block->GetY());
+    canvas->Refresh();
+  }
+}
+

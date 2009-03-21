@@ -28,9 +28,11 @@ MainFrame::MainFrame()
     wxBoxSizer * sizer = new wxBoxSizer(wxHORIZONTAL);
     
     //canvas for displaying images
-    book = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxSize(200, 200), wxNB_TOP);
+    book = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxNB_TOP);
 
-    book->AddPage(new ImagePanel(book, wxID_ANY, TRUE), _("Raw"), true);
+    rawPanel = new ImagePanel(book, wxID_ANY, TRUE);
+
+    book->AddPage(rawPanel, _("Raw"), true);
 
     sizer->Add(book, 1, wxEXPAND, 0);
     
@@ -73,38 +75,6 @@ void MainFrame::OnLoad(wxCommandEvent &evt) {
 
 void MainFrame::UpdateSDT(string fileName) {
   dataPanel->UpdateData(fileName, dataFile->GetBlockCount(), dataFile->GetSetupData());
+  rawPanel->SetImage(dataFile->GetDataBlock(0));
 
-  /*
-  DataBlock * datab = dataFile->GetDataBlock(0);
-  int x = dataFile->GetSetupParam("SP_SCAN_X");
-  int y = dataFile->GetSetupParam("SP_SCAN_Y");
-  int adc = dataFile->GetSetupParam("SP_ADC_RE");
-
-  int c_adc = 190;
-  ushort * block = datab->GetImage(c_adc);
-
-  image = new wxImage(x, y, true);
-  ushort max = 0;
-  for (int i = 0; i < x; i++) {
-    for (int j = 0; j < y; j++) {
-      ushort curr = block[i + j*x];
-      if (curr > max) {
-        max = curr;
-      }
-    }
-  }
-  if (max == 0) {
-    max = 1;
-  }
-  for (int i = 0; i < x; i++) {
-    for (int j = 0; j < y; j++) {
-      ushort curr = (block[i + j*x] * 255) / max;
-      image->SetRGB(i,j, curr, curr, curr);
-    }
-  }
-    
-  image->Rescale(x*4, y*4);
-  canvas->SetImage(*image);
-  canvas->Refresh();
-  */
 }

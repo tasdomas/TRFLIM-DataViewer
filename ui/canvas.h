@@ -13,6 +13,8 @@ public:
   void OnDraw(wxDC& dc);
 
   void SetImage(wxImage & img);
+
+  void SetImage(ushort * img, int size_x, int size_y);
 private:
   wxImage * image;
   wxBitmap * bitmap;
