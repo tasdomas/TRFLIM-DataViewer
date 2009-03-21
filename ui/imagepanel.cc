@@ -8,12 +8,15 @@ enum {
 };
 
 BEGIN_EVENT_TABLE(ImagePanel, wxPanel)
+
 EVT_COMMAND_SCROLL(ID_Slide, ImagePanel::OnSlide)
+EVT_BUTTON(ID_ZoomIn, ImagePanel::ZoomIn)
+EVT_BUTTON(ID_ZoomOut, ImagePanel::ZoomOut)
 END_EVENT_TABLE()
 
 ImagePanel::ImagePanel(wxWindow * parent, wxWindowID id, bool multiImage) 
 : wxPanel(parent, id, wxDefaultPosition),
-  block(NULL) {
+  block(NULL), zoom(1.0) {
 
   wxBoxSizer * sizer = new wxBoxSizer(wxHORIZONTAL);
 
@@ -55,14 +58,29 @@ void ImagePanel::SetImage(DataBlock * image) {
   scroller->SetScrollbar(0, 1, image->GetZ() - 1, 1);
 
   canvas->SetImage(block->GetImage(0), block->GetX(), block->GetY());
-  canvas->Refresh();
+  canvas->Zoom(zoom);
+
 }
 
 void ImagePanel::OnSlide(wxScrollEvent & evt) {
   if (block != NULL) {
     int pos = evt.GetPosition();
     canvas->SetImage(block->GetImage(pos), block->GetX(), block->GetY());
+    canvas->Zoom(zoom);
     canvas->Refresh();
   }
 }
 
+void ImagePanel::ZoomIn(wxCommandEvent & evt) {
+  zoom = zoom * 2;
+  if (block != NULL) {
+    canvas->Zoom(zoom);
+  }
+}
+
+void ImagePanel::ZoomOut(wxCommandEvent & evt) {
+  zoom = zoom / 2;
+  if (block != NULL) {
+    canvas->Zoom(zoom);
+  }
+}

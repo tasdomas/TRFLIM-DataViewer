@@ -11,6 +11,8 @@ class ImagePanel : public wxPanel {
   ~ImagePanel();
 
   void OnSlide(wxScrollEvent & evt);
+  void ZoomIn(wxCommandEvent & evt);
+  void ZoomOut(wxCommandEvent & evt);
 
   void SetImage(DataBlock * image);
 
@@ -20,6 +22,8 @@ class ImagePanel : public wxPanel {
   DVCanvas * canvas;
   DataBlock * block;
   wxScrollBar * scroller;
+  
+  float zoom;
 };
 
 #endif

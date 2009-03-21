@@ -57,12 +57,26 @@ void DVCanvas::SetImage(ushort * img, int size_x, int size_y) {
   bitmap = new wxBitmap(*image);
 
   SetVirtualSizeHints(image->GetWidth(), image->GetHeight());
-  SetScrollbars(1, 1, image->GetWidth(), image->GetHeight());    
+  SetScrollbars(1, 1, image->GetWidth(), image->GetHeight()); 
 }
 
 void DVCanvas::OnDraw(wxDC& dc) {
   if (bitmap != NULL) {
     dc.DrawBitmap(*bitmap, 0, 0, false);
+  }
+}
+
+void DVCanvas::Zoom(float zoom) {
+  if (image != NULL) {
+    delete bitmap;
+
+    bitmap = new wxBitmap(image->Scale((int)(image->GetHeight() * zoom),
+                                         (int)(image->GetWidth() * zoom)));
+
+    SetVirtualSizeHints(bitmap->GetWidth(), bitmap->GetHeight());
+    SetScrollbars(1, 1, bitmap->GetWidth(), bitmap->GetHeight()); 
+
+    Refresh();
   }
 }
 

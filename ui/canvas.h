@@ -10,6 +10,8 @@ public:
 
   ~DVCanvas();
 
+  void Zoom(float zoom);
+
   void OnDraw(wxDC& dc);
 
   void SetImage(wxImage & img);
