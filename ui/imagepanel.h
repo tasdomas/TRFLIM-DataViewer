@@ -22,6 +22,7 @@ class ImagePanel : public wxPanel {
   DVCanvas * canvas;
   DataBlock * block;
   wxScrollBar * scroller;
+  wxStaticText * index;
   
   float zoom;
 };
