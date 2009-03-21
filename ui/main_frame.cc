@@ -34,10 +34,10 @@ MainFrame::MainFrame()
 
     book->AddPage(rawPanel, _("Raw"), true);
 
-    sizer->Add(book, 1, wxEXPAND, 0);
+    sizer->Add(book, 2, wxEXPAND, 0);
     
     dataPanel = new DataPanel(this);
-    sizer->Add(dataPanel, 0.1, wxEXPAND, 0);
+    sizer->Add(dataPanel, 1, wxEXPAND, 0);
     
     SetSizer( sizer );
 

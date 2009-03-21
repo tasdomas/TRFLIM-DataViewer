@@ -12,12 +12,13 @@ public:
   
   void UpdateData(string pFileName, int pBlockCount, string pSetupData);
 
+  DECLARE_EVENT_TABLE()
+
 private:
   wxStaticText * fileName;
   wxSpinCtrl * blockNo;
-  wxButton * setupBtn;
+  wxTextCtrl * setupCtrl;
 
-  string setupData;
 };
 
 

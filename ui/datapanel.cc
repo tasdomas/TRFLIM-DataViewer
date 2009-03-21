@@ -5,9 +5,12 @@ enum {
   ID_SetupBtn,
 };
 
+BEGIN_EVENT_TABLE(DataPanel, wxPanel)
+
+END_EVENT_TABLE()
+
 DataPanel::DataPanel(wxWindow * parent, wxWindowID id)
-  : wxPanel(parent, id),
-    setupData("") {
+  : wxPanel(parent, id) {
   
   wxBoxSizer * sizer = new wxBoxSizer(wxVERTICAL);
   
@@ -24,8 +27,10 @@ DataPanel::DataPanel(wxWindow * parent, wxWindowID id)
                            wxSP_VERTICAL | wxSP_WRAP, 0, 0);
   sizer->Add(blockNo, 0, wxEXPAND);
 
-  setupBtn = new wxButton(this, ID_SetupBtn, _("SetupData"));
-  sizer->Add(setupBtn, 0, wxEXPAND);
+  setupCtrl = new wxTextCtrl(this, ID_SetupBtn, _(""), 
+                             wxDefaultPosition, wxDefaultSize,
+                             wxTE_MULTILINE | wxTE_READONLY | wxHSCROLL | wxTE_DONTWRAP);
+  sizer->Add(setupCtrl, 1, wxEXPAND);
 
   SetSizer(sizer);
 }
@@ -43,5 +48,5 @@ void DataPanel::UpdateData(string pFileName, int pBlockCount, string pSetupData)
 
   fileName->SetLabel(wxString(name.c_str(), wxConvUTF8));
   blockNo->SetRange(0, pBlockCount);
-  setupData = pSetupData;
+  setupCtrl->SetValue(wxString(pSetupData.c_str(), wxConvUTF8));
 }
