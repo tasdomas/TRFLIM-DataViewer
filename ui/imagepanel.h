@@ -13,6 +13,7 @@ class ImagePanel : public wxPanel {
   void OnSlide(wxScrollEvent & evt);
   void ZoomIn(wxCommandEvent & evt);
   void ZoomOut(wxCommandEvent & evt);
+  void Save(wxCommandEvent & evt);
 
   void SetImage(DataBlock * image);
 

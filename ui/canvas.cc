@@ -43,7 +43,7 @@ void DVCanvas::SetImage(DataBlock * block) {
       }
     }
   }
-  wxMessageBox(wxString::Format(_("%d %d"), hmax, smax));
+
   for (int i = 0; i < block->GetX(); i++) {
     for (int j = 0; j < block->GetY(); j++) {
       wxImage::HSVValue t (1.0 * block->GetPoint(i, j, 0) / hmax,
@@ -100,8 +100,8 @@ void DVCanvas::Zoom(float zoom) {
   if (image != NULL) {
     delete bitmap;
 
-    bitmap = new wxBitmap(image->Scale((int)(image->GetHeight() * zoom),
-                                         (int)(image->GetWidth() * zoom)));
+    bitmap = new wxBitmap(image->Scale((int)(image->GetWidth() * zoom),
+                                         (int)(image->GetHeight() * zoom)));
 
     SetVirtualSizeHints(bitmap->GetWidth(), bitmap->GetHeight());
     SetScrollbars(1, 1, bitmap->GetWidth(), bitmap->GetHeight()); 
@@ -110,3 +110,10 @@ void DVCanvas::Zoom(float zoom) {
   }
 }
 
+void DVCanvas::SaveImage(wxString & name, float zoom) {
+  if (image != NULL) {
+    wxImage img (image->Scale((int)image->GetWidth() * zoom, 
+                               (int)image->GetHeight() * zoom));
+    img.SaveFile(name);
+  }
+}

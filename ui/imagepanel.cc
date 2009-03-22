@@ -12,6 +12,7 @@ BEGIN_EVENT_TABLE(ImagePanel, wxPanel)
 EVT_COMMAND_SCROLL(ID_Slide, ImagePanel::OnSlide)
 EVT_BUTTON(ID_ZoomIn, ImagePanel::ZoomIn)
 EVT_BUTTON(ID_ZoomOut, ImagePanel::ZoomOut)
+EVT_BUTTON(ID_SaveImage, ImagePanel::Save)
 END_EVENT_TABLE()
 
 ImagePanel::ImagePanel(wxWindow * parent, wxWindowID id, bool multiImage) 
@@ -97,5 +98,20 @@ void ImagePanel::ZoomOut(wxCommandEvent & evt) {
   zoom = zoom / 2;
   if (block != NULL) {
     canvas->Zoom(zoom);
+  }
+}
+
+void ImagePanel::Save(wxCommandEvent & evt) {
+  wxString filename = wxFileSelector(
+    _("Nurodykite bylos pavadinimą"),
+    _(""),
+    _(""),
+    _(""),
+    _("*.png"),
+    wxFD_SAVE | wxFD_OVERWRITE_PROMPT,
+    this
+  ); 
+  if (! filename.empty()) {
+    canvas->SaveImage(filename, zoom);
   }
 }
