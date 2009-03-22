@@ -1,10 +1,5 @@
 #include "datapanel.h"
-
-enum {
-  ID_BlockNo = 1,
-  ID_SetupBtn,
-};
-
+#include "enums.h"
 BEGIN_EVENT_TABLE(DataPanel, wxPanel)
 
 END_EVENT_TABLE()

@@ -30,6 +30,7 @@ class MainFrame : public wxFrame {
 
     void OnQuit(wxCommandEvent&);
     void OnLoad(wxCommandEvent&);
+    void OnBlockSelect(wxSpinEvent& evt);
   private:
     DECLARE_EVENT_TABLE()
 

@@ -1,13 +1,12 @@
 #include "main_frame.h"
-
-enum {
-  ID_Quit = 1,
-  ID_Load
-};
+#include "enums.h"
 
 BEGIN_EVENT_TABLE(MainFrame, wxFrame) 
-  EVT_MENU(ID_Quit, MainFrame::OnQuit)
-  EVT_MENU(ID_Load, MainFrame::OnLoad)
+
+EVT_MENU(ID_Quit, MainFrame::OnQuit)
+EVT_MENU(ID_Load, MainFrame::OnLoad)
+EVT_SPINCTRL(ID_BlockNo, MainFrame::OnBlockSelect)
+
 END_EVENT_TABLE()
 
 MainFrame::MainFrame() 
@@ -81,7 +80,7 @@ void MainFrame::OnLoad(wxCommandEvent &evt) {
 }
 
 void MainFrame::UpdateSDT(string fileName) {
-  dataPanel->UpdateData(fileName, dataFile->GetBlockCount(), dataFile->GetSetupData());
+  dataPanel->UpdateData(fileName, dataFile->GetBlockCount() - 1, dataFile->GetSetupData());
   rawPanel->SetImage(dataFile->GetDataBlock(0));
   if (fwhm != NULL) {
     delete fwhm;
@@ -90,4 +89,17 @@ void MainFrame::UpdateSDT(string fileName) {
   fwhmPanel->SetImage(fwhm);
 
 
+}
+
+void MainFrame::OnBlockSelect(wxSpinEvent& evt) {
+  wxBeginBusyCursor();
+  int pos = evt.GetPosition();
+  
+  rawPanel->SetImage(dataFile->GetDataBlock(pos));
+  if (fwhm != NULL) {
+    delete fwhm;
+  }
+  fwhm = new FWHMBlock(dataFile->GetDataBlock(pos));
+  fwhmPanel->SetImage(fwhm);
+  wxEndBusyCursor();
 }

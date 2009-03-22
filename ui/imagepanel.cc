@@ -1,11 +1,5 @@
 #include "imagepanel.h"
-
-enum {
-  ID_ZoomIn = 1,
-  ID_ZoomOut,
-  ID_SaveImage,
-  ID_Slide
-};
+#include "enums.h"
 
 BEGIN_EVENT_TABLE(ImagePanel, wxPanel)
 
