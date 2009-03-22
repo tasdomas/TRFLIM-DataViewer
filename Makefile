@@ -13,7 +13,7 @@ MAIN_OBJECTS = main/main.o
 
 LIB_OBJECTS = lib/fwhmblock.o
 
-UI_OBJECTS = ui/canvas.o ui/main_frame.o ui/datapanel.o ui/imagepanel.o
+UI_OBJECTS = ui/canvas.o ui/main_frame.o ui/datapanel.o ui/imagepanel.o ui/scaleframe.o
 
 OBJECTS = $(FILEFORMAT_OBJECTS) $(UI_OBJECTS) $(LIB_OBJECTS)
 

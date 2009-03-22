@@ -5,13 +5,14 @@ BEGIN_EVENT_TABLE(MainFrame, wxFrame)
 
 EVT_MENU(ID_Quit, MainFrame::OnQuit)
 EVT_MENU(ID_Load, MainFrame::OnLoad)
+EVT_MENU(ID_Scale, MainFrame::ShowScale)
 EVT_SPINCTRL(ID_BlockNo, MainFrame::OnBlockSelect)
 
 END_EVENT_TABLE()
 
 MainFrame::MainFrame() 
 : wxFrame(NULL, wxID_ANY, _("DV"), wxDefaultPosition),
-  dataFile(NULL), fwhm(NULL) {
+  dataFile(NULL), fwhm(NULL), scaleFrame(NULL) {
     //the menu
     wxMenu * menuData = new wxMenu;
 
@@ -19,8 +20,12 @@ MainFrame::MainFrame()
     menuData->AppendSeparator();
     menuData->Append( ID_Quit, _("E&xit"));
 
+    wxMenu * menuHelp = new wxMenu;
+    menuHelp->Append( ID_Scale, _("&Scale"));
+
     wxMenuBar *menu = new wxMenuBar;
     menu->Append( menuData, _("&Data"));
+    menu->Append( menuHelp, _("&Help"));
 
     SetMenuBar(menu);
     
@@ -102,4 +107,11 @@ void MainFrame::OnBlockSelect(wxSpinEvent& evt) {
   fwhm = new FWHMBlock(dataFile->GetDataBlock(pos));
   fwhmPanel->SetImage(fwhm);
   wxEndBusyCursor();
+}
+
+void MainFrame::ShowScale(wxCommandEvent&) {
+  if (scaleFrame == NULL) {
+    scaleFrame = new ScaleFrame();
+  }
+  scaleFrame->Show(true);
 }

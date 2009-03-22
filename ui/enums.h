@@ -9,7 +9,8 @@ enum {
   ID_SaveImage,
   ID_Slide,
   ID_Quit,
-  ID_Load
+  ID_Load,
+  ID_Scale
 };
 
 
