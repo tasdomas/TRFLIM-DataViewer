@@ -106,3 +106,14 @@ void DataBlock::SetData(ushort * data, int size) {
     }
   }
 }
+
+ushort DataBlock::GetPoint(int x, int y, int z) {
+  if ((z >= 0) && (z < size_z) &&
+      (x >= 0) && (x < size_x) &&
+      (y >= 0) && (y < size_y)) {
+    return block[z][x + y*size_x];
+  } else {
+    return -1;
+    //throw exception!!!
+  }
+}

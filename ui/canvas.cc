@@ -28,6 +28,35 @@ void DVCanvas::SetImage(wxImage & img) {
   SetScrollbars(1, 1, image->GetWidth(), image->GetHeight());
 }
 
+void DVCanvas::SetImage(DataBlock * block) {
+  image = new wxImage(block->GetX(), block->GetY());
+
+  int hmax = 0;
+  int smax = 0;
+  for (int i = 0; i < block->GetX(); i++) {
+    for (int j = 0; j < block->GetY(); j++) {
+      if (block->GetPoint(i, j, 0) > hmax) {
+        hmax = block->GetPoint(i, j, 0);
+      }
+      if (block->GetPoint(i, j, 1) > smax) {
+        smax = block->GetPoint(i, j, 1);
+      }
+    }
+  }
+  wxMessageBox(wxString::Format(_("%d %d"), hmax, smax));
+  for (int i = 0; i < block->GetX(); i++) {
+    for (int j = 0; j < block->GetY(); j++) {
+      wxImage::HSVValue t (1.0 * block->GetPoint(i, j, 0) / hmax,
+                           1.0,
+                           1.0 - 1.0 * block->GetPoint(i, j, 1) / smax
+                           );
+      wxImage::RGBValue tt = wxImage::HSVtoRGB(t);
+      //char val = 256 * block->GetPoint(i, j, 0) / hmax;
+      image->SetRGB(i, j, tt.red, tt.green, tt.blue);
+    }
+  }
+}
+
 void DVCanvas::SetImage(ushort * img, int size_x, int size_y) {
   if (image != NULL) {
     delete image;
@@ -44,6 +73,7 @@ void DVCanvas::SetImage(ushort * img, int size_x, int size_y) {
       }
     }
   }
+
   if (max == 0) {
     max = 1;
   }

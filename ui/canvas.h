@@ -2,6 +2,7 @@
 #define DV_CANVAS_H
 
 #include "wx/wx.h"
+#include "../fileformat/datablock.h"
 
 class DVCanvas : public wxScrolledWindow {
 public:
@@ -17,6 +18,8 @@ public:
   void SetImage(wxImage & img);
 
   void SetImage(ushort * img, int size_x, int size_y);
+  void SetImage(DataBlock * block);
+
 private:
   wxImage * image;
   wxBitmap * bitmap;

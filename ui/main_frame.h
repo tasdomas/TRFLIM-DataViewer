@@ -10,6 +10,7 @@
 
 #include "../fileformat/sdt.h"
 #include "../fileformat/datablock.h"
+#include "../lib/fwhmblock.h"
 
 class MainFrame : public wxFrame {
   protected:
@@ -17,8 +18,11 @@ class MainFrame : public wxFrame {
     wxNotebook * book;
     DataPanel * dataPanel;
     ImagePanel * rawPanel;
+    ImagePanel * fwhmPanel;
 
     SDT * dataFile;
+
+    FWHMBlock * fwhm;
 
     void UpdateSDT(string fileName = "");
   public:

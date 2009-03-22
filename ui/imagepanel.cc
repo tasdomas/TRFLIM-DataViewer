@@ -16,7 +16,7 @@ END_EVENT_TABLE()
 
 ImagePanel::ImagePanel(wxWindow * parent, wxWindowID id, bool multiImage) 
 : wxPanel(parent, id, wxDefaultPosition),
-  block(NULL), zoom(1.0) {
+  block(NULL), zoom(1.0), multi(multiImage) {
 
   wxBoxSizer * sizer = new wxBoxSizer(wxHORIZONTAL);
 
@@ -59,11 +59,16 @@ ImagePanel::~ImagePanel() {
 void ImagePanel::SetImage(DataBlock * image) {
   block = image;
 
-  scroller->SetScrollbar(0, 1, image->GetZ() - 1, 1);
-  index->SetLabel(wxString::Format(_("%d/%d"), 1, block->GetZ()));
+  if (multi) {
+    scroller->SetScrollbar(0, 1, image->GetZ() - 1, 1);
+    index->SetLabel(wxString::Format(_("%d/%d"), 1, block->GetZ()));
 
-  canvas->SetImage(block->GetImage(0), block->GetX(), block->GetY());
-  canvas->Zoom(zoom);
+    canvas->SetImage(block->GetImage(0), block->GetX(), block->GetY());
+    canvas->Zoom(zoom);
+  } else {
+    canvas->SetImage(block);
+    canvas->Zoom(zoom);
+  }
 
 }
 

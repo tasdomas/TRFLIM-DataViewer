@@ -18,6 +18,7 @@ public:
   ~DataBlock();
   
   ushort * GetImage(int z);
+  ushort GetPoint(int x, int y, int z);
 
   void SetData(ushort * data, int size);
 

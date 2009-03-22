@@ -12,7 +12,7 @@ END_EVENT_TABLE()
 
 MainFrame::MainFrame() 
 : wxFrame(NULL, wxID_ANY, _("DV"), wxDefaultPosition),
-  dataFile(NULL) {
+  dataFile(NULL), fwhm(NULL) {
     //the menu
     wxMenu * menuData = new wxMenu;
 
@@ -31,8 +31,10 @@ MainFrame::MainFrame()
     book = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxNB_TOP);
 
     rawPanel = new ImagePanel(book, wxID_ANY, TRUE);
+    fwhmPanel = new ImagePanel(book, wxID_ANY, FALSE);    
 
     book->AddPage(rawPanel, _("Raw"), true);
+    book->AddPage(fwhmPanel, _("FWHM"), false);
 
     sizer->Add(book, 2, wxEXPAND, 0);
     
@@ -48,6 +50,9 @@ MainFrame::MainFrame()
 
 void MainFrame::OnQuit(wxCommandEvent &evt) {
   Close(TRUE);
+  if (fwhm != NULL) {
+    delete fwhm;
+  }
 }
 
 // load file
@@ -78,5 +83,11 @@ void MainFrame::OnLoad(wxCommandEvent &evt) {
 void MainFrame::UpdateSDT(string fileName) {
   dataPanel->UpdateData(fileName, dataFile->GetBlockCount(), dataFile->GetSetupData());
   rawPanel->SetImage(dataFile->GetDataBlock(0));
+  if (fwhm != NULL) {
+    delete fwhm;
+  }
+  fwhm = new FWHMBlock(dataFile->GetDataBlock(0));
+  fwhmPanel->SetImage(fwhm);
+
 
 }

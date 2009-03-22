@@ -19,6 +19,7 @@ class ImagePanel : public wxPanel {
   DECLARE_EVENT_TABLE()
 
  private:
+  bool multi;
   DVCanvas * canvas;
   DataBlock * block;
   wxScrollBar * scroller;
