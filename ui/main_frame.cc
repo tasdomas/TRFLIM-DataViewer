@@ -14,7 +14,10 @@ MainFrame::MainFrame()
 : wxFrame(NULL, wxID_ANY, _("DV"), wxDefaultPosition),
   dataFile(NULL), fwhm(NULL), scaleFrame(NULL) {
     //the menu
+
+  
     wxMenu * menuData = new wxMenu;
+    CreateStatusBar();
 
     menuData->Append( ID_Load, _("&Load.."));
     menuData->AppendSeparator();

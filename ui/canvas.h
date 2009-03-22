@@ -6,6 +6,8 @@
 
 class DVCanvas : public wxScrolledWindow {
 public:
+  void MouseDown(wxMouseEvent & evt);
+
   DVCanvas(wxWindow * parent, wxWindowID id, 
       const wxPoint & pos = wxDefaultPosition, const wxSize & size = wxDefaultSize);
 
@@ -21,10 +23,11 @@ public:
   void SetImage(DataBlock * block);
   
   void SaveImage(wxString & name, float zoom);
-
+  DECLARE_EVENT_TABLE()
 private:
   wxImage * image;
   wxBitmap * bitmap;
+  DataBlock * data;
 };
 
 

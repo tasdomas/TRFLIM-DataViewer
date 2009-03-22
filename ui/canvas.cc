@@ -1,9 +1,15 @@
 #include "canvas.h"
 
+BEGIN_EVENT_TABLE(DVCanvas, wxScrolledWindow)
+
+EVT_LEFT_DOWN(DVCanvas::MouseDown)
+
+END_EVENT_TABLE()
+
 DVCanvas::DVCanvas(wxWindow * parent, wxWindowID id, 
 const wxPoint & pos, const wxSize & size) 
   : wxScrolledWindow(parent, id, pos, size, wxHSCROLL | wxVSCROLL),
-  image(NULL), bitmap(NULL) {
+  image(NULL), bitmap(NULL), data(NULL) {
 
 }
 
@@ -21,6 +27,8 @@ void DVCanvas::SetImage(wxImage & img) {
     delete image;
     delete bitmap;
   }
+  data = NULL;
+
   image = new wxImage(img);
   bitmap = new wxBitmap(*image);
 
@@ -30,6 +38,7 @@ void DVCanvas::SetImage(wxImage & img) {
 
 void DVCanvas::SetImage(DataBlock * block) {
   image = new wxImage(block->GetX(), block->GetY());
+  data = block;
 
   int hmax = 0;
   int smax = 0;
@@ -116,4 +125,22 @@ void DVCanvas::SaveImage(wxString & name, float zoom) {
                                (int)image->GetHeight() * zoom));
     img.SaveFile(name);
   }
+}
+
+void DVCanvas::MouseDown(wxMouseEvent & evt) {
+  if ((image != NULL) && (data != NULL)) {
+    wxPoint pt = evt.GetLogicalPosition(*(new wxClientDC(this)));
+  
+    if ((pt.x <= bitmap->GetWidth()) && (pt.y < bitmap->GetHeight())) {
+      float zoom = (float)bitmap->GetWidth() / image->GetWidth();
+      pt.x = pt.x / zoom;
+      pt.y = pt.y / zoom;
+      int intensity = data->GetPoint(pt.x, pt.y, 0);
+      int fwhm = data->GetPoint(pt.x, pt.y, 1);
+      wxFrame * frame = (wxFrame*)(((GetParent())->GetParent())->GetParent());
+      frame->SetStatusText(wxString::Format(_("Int: %d, FWHM: %d"), intensity, fwhm));
+    }
+  }
+  
+  evt.Skip();
 }
