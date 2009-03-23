@@ -11,21 +11,22 @@ class ImagePanel : public wxPanel {
   ~ImagePanel();
 
   void OnSlide(wxScrollEvent & evt);
-  void ZoomIn(wxCommandEvent & evt);
-  void ZoomOut(wxCommandEvent & evt);
-  void Save(wxCommandEvent & evt);
+  void ZoomIn(wxCommandEvent &);
+  void ZoomOut(wxCommandEvent &);
+  void Save(wxCommandEvent &);
 
   void SetImage(DataBlock * image);
 
   DECLARE_EVENT_TABLE()
 
  private:
-  bool multi;
+
   DVCanvas * canvas;
   DataBlock * block;
   wxScrollBar * scroller;
   wxStaticText * index;
-  
+
+  bool multi;  
   float zoom;
 };
 

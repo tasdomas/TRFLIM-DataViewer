@@ -7,6 +7,10 @@
 #include <iostream>
 using namespace std;
 
+typedef unsigned short int ushort;
+typedef unsigned long int ulong;
+
+
 ushort rd_sh (istream &is);
 
 class FileHeader {

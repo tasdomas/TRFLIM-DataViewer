@@ -35,7 +35,7 @@ DataPanel::~DataPanel() {
 
 void DataPanel::UpdateData(string pFileName, int pBlockCount, string pSetupData) {
   // get only the filename
-  int pos = pFileName.find_last_of("/\\");
+  unsigned int pos = pFileName.find_last_of("/\\");
   string name = pFileName;
   if (pos != string::npos) {
     name = pFileName.substr(pos+1);

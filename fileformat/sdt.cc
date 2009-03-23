@@ -22,7 +22,7 @@ SDT::SDT(string fname) {
 
     ushort * data_block = new ushort[data_headers[i].block_length / 2];
     in.seekg(data_headers[i].data_offset, ios::beg);
-    for (int j = 0; j < data_headers[i].block_length / 2; j++) {
+    for (unsigned int j = 0; j < data_headers[i].block_length / 2; j++) {
       data_block[j] = rd_sh(in);
     }
     DataBlock img(data_block, 
@@ -85,6 +85,7 @@ DataBlock * SDT::GetDataBlock(int i) {
   if (i < header.data_count) {
     return &data[i];
   }
+  return NULL;
 
 }
 

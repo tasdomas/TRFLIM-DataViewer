@@ -16,11 +16,11 @@
 class MainFrame : public wxFrame {
   protected:
     wxImage * image;
-    ScaleFrame * scaleFrame;
     wxNotebook * book;
     DataPanel * dataPanel;
     ImagePanel * rawPanel;
     ImagePanel * fwhmPanel;
+    ScaleFrame * scaleFrame;
 
     SDT * dataFile;
 

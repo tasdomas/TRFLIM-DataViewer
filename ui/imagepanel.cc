@@ -11,7 +11,7 @@ END_EVENT_TABLE()
 
 ImagePanel::ImagePanel(wxWindow * parent, wxWindowID id, bool multiImage) 
 : wxPanel(parent, id, wxDefaultPosition),
-  block(NULL), zoom(1.0), multi(multiImage) {
+  block(NULL), multi(multiImage), zoom(1.0) {
 
   wxBoxSizer * sizer = new wxBoxSizer(wxHORIZONTAL);
 
@@ -81,21 +81,21 @@ void ImagePanel::OnSlide(wxScrollEvent & evt) {
   }
 }
 
-void ImagePanel::ZoomIn(wxCommandEvent & evt) {
+void ImagePanel::ZoomIn(wxCommandEvent &) {
   zoom = zoom * 2;
   if (block != NULL) {
     canvas->Zoom(zoom);
   }
 }
 
-void ImagePanel::ZoomOut(wxCommandEvent & evt) {
+void ImagePanel::ZoomOut(wxCommandEvent &) {
   zoom = zoom / 2;
   if (block != NULL) {
     canvas->Zoom(zoom);
   }
 }
 
-void ImagePanel::Save(wxCommandEvent & evt) {
+void ImagePanel::Save(wxCommandEvent &) {
   wxString filename = wxFileSelector(
     _("Nurodykite bylos pavadinimą"),
     _(""),

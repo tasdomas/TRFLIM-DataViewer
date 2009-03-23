@@ -5,6 +5,8 @@
 #include <stdlib.h>
 using namespace std;
 
+typedef unsigned short int ushort;
+
 class FWHMBlock;
 
 class DataBlock {

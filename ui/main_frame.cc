@@ -12,7 +12,7 @@ END_EVENT_TABLE()
 
 MainFrame::MainFrame() 
 : wxFrame(NULL, wxID_ANY, _("DV"), wxDefaultPosition),
-  dataFile(NULL), fwhm(NULL), scaleFrame(NULL) {
+  scaleFrame(NULL), dataFile(NULL), fwhm(NULL) {
     //the menu
 
   
@@ -55,7 +55,7 @@ MainFrame::MainFrame()
     Centre();
 }
 
-void MainFrame::OnQuit(wxCommandEvent &evt) {
+void MainFrame::OnQuit(wxCommandEvent &) {
   Close(TRUE);
   if (fwhm != NULL) {
     delete fwhm;
@@ -63,7 +63,7 @@ void MainFrame::OnQuit(wxCommandEvent &evt) {
 }
 
 // load file
-void MainFrame::OnLoad(wxCommandEvent &evt) {
+void MainFrame::OnLoad(wxCommandEvent &) {
 
   wxString filename = wxFileSelector(
     _("SDT file to open"),
