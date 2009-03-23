@@ -95,7 +95,7 @@ int DataBlock::GetZ() {
   return size_z;
 }
 
-void DataBlock::SetData(ushort * data, int size) {
+void DataBlock::SetData(uushort * data, int size) {
   if (size_x * size_y * size_z == size) {
     for (int j = 0; j < size_z; j++) {
       //going through all the adc points

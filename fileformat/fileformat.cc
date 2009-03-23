@@ -32,7 +32,7 @@ uulong rd_l (istream &is) {
     is.read((char*)&t, 1);
     //cout << hex << is.tellg() << " -> " << (unsigned int)t << endl;
     //cout << hex << (unsigned int)t << endl;
-    out = out | (ulong)(t << 8*i);
+    out = out | (uulong)(t << 8*i);
   }
   return out;
 }

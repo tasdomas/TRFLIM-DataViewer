@@ -1,12 +1,13 @@
-CXX = g++
-#CXX = i586-mingw32msvc-gcc
+#CXX = g++
+CXX = i586-mingw32msvc-g++
 PROGRAM = dv_ui
-# wx-config --libs
-WX_LIBS = $(shell wx-config --libs)
-# wx-config --cxxflags
-#
+
+#WX_LIBS = $(shell wx-config --libs)
+WX_LIBS = $(shell /usr/local/wx-2.8.9-mingw32/bin/wx-config --libs)
+#WX_CXXFLAGS = $(shell wx-config --cxxflags)
+WX_CXXFLAGS = -W -Wall -g $(shell /usr/local/wx-2.8.9-mingw32/bin/wx-config --cxxflags)
+
 INCLUDES = 
-WX_CXXFLAGS = -W -Wall -g $(shell wx-config --cxxflags)
 
 OBJECTS = app.o main_frame.o canvas.o datapanel.o imagepanel.o scaleframe.o
 
