@@ -14,13 +14,13 @@ SDT::SDT(string fname) {
   in.read(setup, header.setup_length);
 
   data_headers = new DataBlockHeader[header.data_count];
-  ulong offs = header.data_offset;
+  uulong offs = header.data_offset;
   for (int i = 0; i < header.data_count; i++) {
     in.seekg(offs, ios::beg);
     in >> data_headers[i];
     offs = data_headers[i].next_block_offset;
 
-    ushort * data_block = new ushort[data_headers[i].block_length / 2];
+    uushort * data_block = new uushort[data_headers[i].block_length / 2];
     in.seekg(data_headers[i].data_offset, ios::beg);
     for (unsigned int j = 0; j < data_headers[i].block_length / 2; j++) {
       data_block[j] = rd_sh(in);

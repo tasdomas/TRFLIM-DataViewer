@@ -32,7 +32,7 @@ void FWHMBlock::CalculateIntensity() {
 }
 
 void FWHMBlock::CalculateFWHM() {
-  ushort * vector = new ushort[original->GetZ()];
+  uushort * vector = new uushort[original->GetZ()];
 
   int max = 0;
   int max_index = 0;

@@ -3,6 +3,7 @@
 
 #include "wx/wx.h"
 #include "../fileformat/datablock.h"
+#include "../fileformat/typedef.h"
 
 class DVCanvas : public wxScrolledWindow {
 public:
@@ -19,7 +20,7 @@ public:
 
   void SetImage(wxImage & img);
 
-  void SetImage(ushort * img, int size_x, int size_y);
+  void SetImage(uushort * img, int size_x, int size_y);
   void SetImage(DataBlock * block);
   
   void SaveImage(wxString & name, float zoom);

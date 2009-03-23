@@ -66,17 +66,17 @@ void DVCanvas::SetImage(DataBlock * block) {
   }
 }
 
-void DVCanvas::SetImage(ushort * img, int size_x, int size_y) {
+void DVCanvas::SetImage(uushort * img, int size_x, int size_y) {
   if (image != NULL) {
     delete image;
     delete bitmap;
   }
 
   image = new wxImage(size_x, size_y, true);
-  ushort max = 0;
+  uushort max = 0;
   for (int i = 0; i < size_x; i++) {
     for (int j = 0; j < size_y; j++) {
-      ushort curr = img[i + j*size_x];
+      uushort curr = img[i + j*size_x];
       if (curr > max) {
         max = curr;
       }
@@ -88,7 +88,7 @@ void DVCanvas::SetImage(ushort * img, int size_x, int size_y) {
   }
   for (int i = 0; i < size_x; i++) {
     for (int j = 0; j < size_y; j++) {
-      ushort curr = (img[i + j*size_x] * 255) / max;
+      uushort curr = (img[i + j*size_x] * 255) / max;
       image->SetRGB(i,j, curr, curr, curr);
     }
   }

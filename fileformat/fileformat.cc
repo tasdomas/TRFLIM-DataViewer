@@ -13,8 +13,8 @@ float rd_fl (istream &is) {
   return *ret;
 }
 
-ushort rd_sh (istream &is) {
-  ushort out = 0;
+uushort rd_sh (istream &is) {
+  uushort out = 0;
   unsigned char t;
   for (int i = 0; i < 2; i++) {
     is.read((char*)&t, 1);
@@ -25,8 +25,8 @@ ushort rd_sh (istream &is) {
   return out;
 }
 
-ulong rd_l (istream &is) {
-  ulong out = 0;
+uulong rd_l (istream &is) {
+  uulong out = 0;
   unsigned char t;
   for (int i = 0; i < 4; i++) {
     is.read((char*)&t, 1);

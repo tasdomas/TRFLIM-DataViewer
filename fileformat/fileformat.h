@@ -5,36 +5,35 @@
 #include <stdlib.h>
 
 #include <iostream>
+
+#include "typedef.h"
+
 using namespace std;
 
-typedef unsigned short int ushort;
-typedef unsigned long int ulong;
-
-
-ushort rd_sh (istream &is);
+uushort rd_sh (istream &is);
 
 class FileHeader {
 public:
-  ushort revision;
+  uushort revision;
 
-  ulong info_offset;
-  ushort info_length;
+  uulong info_offset;
+  uushort info_length;
 
-  ulong setup_offset;
-  ushort setup_length;
+  uulong setup_offset;
+  uushort setup_length;
 
-  ulong data_offset; //offset to the first data block
-  ushort data_count; //number of data blocks
-  ulong data_block_length; //length of the longest data block
+  uulong data_offset; //offset to the first data block
+  uushort data_count; //number of data blocks
+  uulong data_block_length; //length of the longest data block
   
-  ulong meas_desc_offset; //offset of the first measurement description block
-  ushort meas_desc_count;
-  ushort meas_desc_length; 
+  uulong meas_desc_offset; //offset of the first measurement description block
+  uushort meas_desc_count;
+  uushort meas_desc_length; 
   
-  ushort header_valid;
-  ulong reserved1;
-  ushort reserved2;
-  ushort chksum;
+  uushort header_valid;
+  uulong reserved1;
+  uushort reserved2;
+  uushort chksum;
 
   friend istream& operator >>(istream &is, FileHeader &obj);
 };
@@ -44,10 +43,10 @@ public:
   short block_no;
   long data_offset;
   long next_block_offset;
-  ushort block_type;
+  uushort block_type;
   short meas_desc_no; //number of the measurement description block
-  ulong lblock_no;
-  ulong block_length;
+  uulong lblock_no;
+  uulong block_length;
         
   friend istream& operator >>(istream &is, DataBlockHeader &obj);
 };
@@ -74,7 +73,7 @@ public:
   short eal_de;
   short ncx;
   short ncy;
-  ushort page;
+  uushort page;
   float col_t;
   float rep_t;
   short stopt;
