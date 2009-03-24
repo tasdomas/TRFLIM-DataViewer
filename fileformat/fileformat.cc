@@ -1,7 +1,11 @@
 #include "fileformat.h"
 
 
-float rd_fl (istream &is) {
+float rd_fl (istream &is) throw (BasicException) {
+  if (is.eof()) {
+    throw BasicException("Unexepcted EOF!");
+  }
+
   long out = 0;
   unsigned char t;
   for (int i = 0; i < 4; i++) {
@@ -13,7 +17,11 @@ float rd_fl (istream &is) {
   return *ret;
 }
 
-uushort rd_sh (istream &is) {
+uushort rd_sh (istream &is) throw (BasicException){
+  if (is.eof()) {
+    throw BasicException("Unexepcted EOF!");
+  }
+
   uushort out = 0;
   unsigned char t;
   for (int i = 0; i < 2; i++) {
@@ -25,7 +33,11 @@ uushort rd_sh (istream &is) {
   return out;
 }
 
-uulong rd_l (istream &is) {
+uulong rd_l (istream &is) throw (BasicException) {
+  if (is.eof()) {
+    throw BasicException("Unexepcted EOF!");
+  }
+
   uulong out = 0;
   unsigned char t;
   for (int i = 0; i < 4; i++) {

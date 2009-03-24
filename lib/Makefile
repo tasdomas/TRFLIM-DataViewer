@@ -1,16 +1,18 @@
-#COMPILER = g++
-COMPILER = i586-mingw32msvc-g++
+COMPILER = g++
+#COMPILER = i586-mingw32msvc-g++
 CCFLAGS = -g -ansi -W -Wall
 LIBFLAGS = -lm
 
 %.o : %.cc
 	$(COMPILER) $(CCFLAGS) -c $<
 
-objects = fwhmblock.o
+objects = fwhmblock.o exception.o
 
 all: $(objects) 
 
 fwhmblock.o: fwhmblock.cc
+
+exception.o: exception.cc
 
 clean:
 	rm $(objects)

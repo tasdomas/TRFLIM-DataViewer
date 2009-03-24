@@ -7,10 +7,9 @@
 #include <iostream>
 
 #include "typedef.h"
+#include "../lib/exception.h"
 
 using namespace std;
-
-uushort rd_sh (istream &is);
 
 class FileHeader {
 public:
