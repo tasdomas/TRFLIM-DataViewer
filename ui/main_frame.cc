@@ -113,8 +113,7 @@ void MainFrame::OnBlockSelect(wxSpinEvent& evt) {
 }
 
 void MainFrame::ShowScale(wxCommandEvent&) {
-  if (scaleFrame == NULL) {
-    scaleFrame = new ScaleFrame();
-  }
+  scaleFrame = new ScaleFrame();
+
   scaleFrame->Show(true);
 }

@@ -5,10 +5,10 @@ ScaleFrame::ScaleFrame()
 
   wxGridBagSizer * sizer = new wxGridBagSizer();
   
-  wxStaticText * text = new wxStaticText(this, wxID_ANY, _("FWHM"));
+  wxStaticText * text = new wxStaticText(this, wxID_ANY, _("Intensity"));
   sizer->Add(text, wxGBPosition(0,0));
 
-  wxStaticText * text2 = new wxStaticText(this, wxID_ANY, _("Intensity"));
+  wxStaticText * text2 = new wxStaticText(this, wxID_ANY, _("FWHM"));
   sizer->Add(text2, wxGBPosition(1,1));
 
   DVCanvas * canvas = new DVCanvas(this, wxID_ANY, wxDefaultPosition, wxSize(200,200));
@@ -17,7 +17,7 @@ ScaleFrame::ScaleFrame()
   wxImage img (200, 200, true);
   for (int x = 0; x  < 200; x++) {
     for (int y = 0; y < 200; y++) {
-      wxImage::HSVValue t (1.0 * (float)x / 200,
+      wxImage::HSVValue t (0.75 - 0.75*(float)x / 200,
                            1.0,
                            1.0 -  (float)y / 200
                            );
