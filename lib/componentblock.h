@@ -21,8 +21,10 @@ class ComponentBlock : public DataBlock {
   float sigma_t;
   int components;
   
-  void ConstructIRF();
+  void ConstructIRF(); //construct the IRF matrix
+  void LinearizeData(); //linearize datablock, reducing a set of matrices to a single matrix
 
   Matrix * IRF;
+  Matrix * D;
 };
 #endif
