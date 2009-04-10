@@ -6,6 +6,8 @@ ComponentBlock::ComponentBlock(DataBlock * data, float sigma, int count, vector<
     IRF(NULL), D(NULL) {
 
   ConstructIRF();
+  LinearizeData();
+  RemoveIRF();
 }
 
 ComponentBlock::~ComponentBlock() {
@@ -16,6 +18,10 @@ ComponentBlock::~ComponentBlock() {
   if (D != NULL) {
     delete D;
   }
+
+  if (E != NULL) {
+    delete E;
+  }
 }
 
 void ComponentBlock::ConstructIRF() {
@@ -23,7 +29,8 @@ void ComponentBlock::ConstructIRF() {
   for (int i = 0; i < components; i++) {
     for (int j = 0; j < components; j++) {
       if (i == j) {
-        IRF->element(i, j) = 0.5 + (1 + erf((float)i / sigma_t));
+        float value = 0.5 + (1 + erf((float)i / sigma_t));
+        IRF->element(i, j) = 1/value;
       } else {
         IRF->element(i, j) = 0.0;
       }
@@ -40,4 +47,24 @@ void ComponentBlock::LinearizeData() {
       }
     }
   }
+}
+
+void ComponentBlock::RemoveIRF() {
+  if ((IRF != NULL) && (D != NULL)) {
+    *D = *IRF * *D;
+  }
+}
+
+void ComponentBlock::CreateExponential() {
+  if (E != NULL) {
+    delete E;
+  }
+  E = new Matrix(original->GetZ(), components);
+
+  for (int time = 0; time < original->GetZ(); time++) {
+    for (int comp = 0; comp < components; comp++) {
+      E->element(time, comp) = exp(- (float) time / lifetimes[comp]);
+    }
+  }
+  *E = E->i();
 }

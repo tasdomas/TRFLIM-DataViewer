@@ -23,8 +23,11 @@ class ComponentBlock : public DataBlock {
   
   void ConstructIRF(); //construct the IRF matrix
   void LinearizeData(); //linearize datablock, reducing a set of matrices to a single matrix
+  void RemoveIRF();
+  void CreateExponential();
 
   Matrix * IRF;
   Matrix * D;
+  Matrix * E;
 };
 #endif
