@@ -11,8 +11,11 @@ using namespace std;
 class ComponentBlock : public DataBlock {
 
  public:
-  ComponentBlock(DataBlock * data, float sigma, int count, vector<float> & tau);
+  ComponentBlock(DataBlock * data);
   ~ComponentBlock();
+
+  void Compute(float sigma, int count, vector<float> & tau);
+
 
  private:
   DataBlock * original;

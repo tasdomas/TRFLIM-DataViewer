@@ -11,17 +11,19 @@ WX_CXXFLAGS = $(shell wx-config --cxxflags)
 
 
 
-LIBRARIES = main/ fileformat/ ui/ lib/
+LIBRARIES = main/ fileformat/ ui/ lib/ include/newmat/
 
 FILEFORMAT_OBJECTS = fileformat/fileformat.o fileformat/sdt.o fileformat/datablock.o
 
 MAIN_OBJECTS = main/main.o
 
+INCLUDE_OBJECTS = include/newmat/libnewmat.a
+
 LIB_OBJECTS = lib/fwhmblock.o lib/exception.o
 
 UI_OBJECTS = ui/canvas.o ui/main_frame.o ui/datapanel.o ui/imagepanel.o ui/scaleframe.o ui/grayscalepanel.o ui/componentspanel.o
 
-OBJECTS = $(FILEFORMAT_OBJECTS) $(UI_OBJECTS) $(LIB_OBJECTS)
+OBJECTS = $(FILEFORMAT_OBJECTS) $(UI_OBJECTS) $(LIB_OBJECTS) $(INCLUDE_OBJECTS)
 
 .PHONY: all $(LIBRARIES)
 

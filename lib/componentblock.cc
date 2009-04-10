@@ -1,14 +1,22 @@
 #include "componentblock.h"
 
-ComponentBlock::ComponentBlock(DataBlock * data, float sigma, int count, vector<float> & tau)
-  : DataBlock(data->GetX(), data->GetY(), count),
-    original(data), lifetimes(tau), sigma_t(sigma), components(count),
-    IRF(NULL), D(NULL) {
+ComponentBlock::ComponentBlock(DataBlock * data)
+  : DataBlock(data->GetX(), data->GetY(), 1),
+    original(data), IRF(NULL), D(NULL) {
+
+
+}
+
+void ComponentBlock::Compute(float sigma, int count, vector<float> & tau) {
+  lifetimes = tau;
+  sigma_t = sigma;
+  components = count;
 
   ConstructIRF();
   LinearizeData();
   RemoveIRF();
 }
+
 
 ComponentBlock::~ComponentBlock() {
   if (IRF != NULL) {
