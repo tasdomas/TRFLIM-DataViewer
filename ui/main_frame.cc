@@ -37,8 +37,8 @@ MainFrame::MainFrame()
     //canvas for displaying images
     book = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxNB_TOP);
 
-    rawPanel = new ImagePanel(book, wxID_ANY, TRUE);
-    fwhmPanel = new ImagePanel(book, wxID_ANY, FALSE);    
+    rawPanel = new GrayScalePanel(book, wxID_ANY, TRUE);
+    fwhmPanel = new GrayScalePanel(book, wxID_ANY, FALSE);    
 
     book->AddPage(rawPanel, _("Raw"), true);
     book->AddPage(fwhmPanel, _("FWHM"), false);

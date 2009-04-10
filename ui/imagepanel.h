@@ -5,12 +5,12 @@
 #include "canvas.h"
 #include "../fileformat/datablock.h"
 
+/* generic image panel class */
 class ImagePanel : public wxPanel {
  public:
-  ImagePanel(wxWindow * parent, wxWindowID id = wxID_ANY, bool multiImage = TRUE);
+  ImagePanel(wxWindow * parent, wxWindowID id = wxID_ANY);
   ~ImagePanel();
 
-  void OnSlide(wxScrollEvent & evt);
   void ZoomIn(wxCommandEvent &);
   void ZoomOut(wxCommandEvent &);
   void Save(wxCommandEvent &);
@@ -19,15 +19,29 @@ class ImagePanel : public wxPanel {
 
   DECLARE_EVENT_TABLE()
 
- private:
+ protected:
 
   DVCanvas * canvas;
   DataBlock * block;
+
+  float zoom;
+
+  wxBoxSizer * sizer;
+  wxBoxSizer * sizerLeft;
+};
+
+class GrayScalePanel : public ImagePanel {
+ public:
+  GrayScalePanel(wxWindow * parent, wxWindowID = wxID_ANY, bool multiImage = false);
+  ~GrayScalePanel();
+
+  void OnSlide(wxScrollEvent & evt);
+  void SetImage(DataBlock * image);
+  DECLARE_EVENT_TABLE()
+ private:
   wxScrollBar * scroller;
   wxStaticText * index;
-
-  bool multi;  
-  float zoom;
+  bool multi;
 };
 
 #endif

@@ -18,8 +18,8 @@ class MainFrame : public wxFrame {
     wxImage * image;
     wxNotebook * book;
     DataPanel * dataPanel;
-    ImagePanel * rawPanel;
-    ImagePanel * fwhmPanel;
+    GrayScalePanel * rawPanel;
+    GrayScalePanel * fwhmPanel;
     ScaleFrame * scaleFrame;
 
     SDT * dataFile;
