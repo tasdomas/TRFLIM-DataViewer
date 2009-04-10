@@ -4,6 +4,8 @@
 #include "wx/wx.h"
 #include "canvas.h"
 #include "../fileformat/datablock.h"
+#include "../lib/componentblock.h"
+#include "wx/spinctrl.h"
 
 /* generic image panel class */
 class ImagePanel : public wxPanel {
@@ -44,4 +46,14 @@ class GrayScalePanel : public ImagePanel {
   bool multi;
 };
 
+class ComponentsPanel : public ImagePanel {
+ public:
+  ComponentsPanel(wxWindow * parent, wxWindowID = wxID_ANY);
+  ~ComponentsPanel();
+
+  void SetImage(ComponentBlock * image);
+ protected:
+  wxSpinCtrl * compNo;
+  wxButton * btnCompute;
+};
 #endif
