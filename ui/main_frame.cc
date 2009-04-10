@@ -39,9 +39,11 @@ MainFrame::MainFrame()
 
     rawPanel = new GrayScalePanel(book, wxID_ANY, TRUE);
     fwhmPanel = new GrayScalePanel(book, wxID_ANY, FALSE);    
+    componentsPanel = new ComponentsPanel(book, wxID_ANY);
 
     book->AddPage(rawPanel, _("Raw"), true);
     book->AddPage(fwhmPanel, _("FWHM"), false);
+    book->AddPage(componentsPanel, _("Comp"), false);
 
     sizer->Add(book, 2, wxEXPAND, 0);
     

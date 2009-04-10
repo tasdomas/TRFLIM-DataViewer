@@ -20,6 +20,7 @@ class MainFrame : public wxFrame {
     DataPanel * dataPanel;
     GrayScalePanel * rawPanel;
     GrayScalePanel * fwhmPanel;
+    ComponentsPanel * componentsPanel;
     ScaleFrame * scaleFrame;
 
     SDT * dataFile;
