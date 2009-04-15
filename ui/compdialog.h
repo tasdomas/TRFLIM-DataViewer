@@ -26,8 +26,11 @@ class CompDialog : public wxDialog {
 
   DECLARE_EVENT_TABLE()
  private:
+  bool status;
+
   wxBoxSizer * sizer;
   wxTextCtrl * sigma;
+  wxStaticText * msg;
   vector<wxTextCtrl *> lifetimes;
   wxSpinCtrl * count;
 };

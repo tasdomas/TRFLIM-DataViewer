@@ -9,7 +9,8 @@ END_EVENT_TABLE()
 CompDialog::CompDialog(wxWindow * parent, wxWindowID id)
 : wxDialog(parent, id, _("Component analysis"),
            wxDefaultPosition, wxDefaultSize,
-           wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER) {
+           wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER),
+  status(false) {
 
   sizer = new wxBoxSizer(wxVERTICAL);
 
@@ -41,6 +42,10 @@ CompDialog::CompDialog(wxWindow * parent, wxWindowID id)
   wxButton * btnCancel = new wxButton(this, ID_CD_No, _("Cancel"));
   sizer->Add(btnCancel);
 
+  msg = new wxStaticText(this, wxID_ANY, wxEmptyString);
+  msg->SetForegroundColour(*wxRED);
+  sizer->Add(msg);
+
   SetSizer(sizer);
   sizer->SetSizeHints(this);
   sizer->SetSizeHints(this);
@@ -63,9 +68,29 @@ vector<float> CompDialog::GetLifetimes() {
 }
 
 void CompDialog::OnYes(wxCommandEvent &) {
+  bool ok = true;
+  wxString message = wxEmptyString;
+  double temp;
+  if (! (sigma->GetValue()).ToDouble(&temp)) {
+    message += _("Sigma must be a valid number.\n");
+    ok = false;
+  }
+  for (int i = 0; i < lifetimes.size(); i++) {
+    if (! ((lifetimes[i])->GetValue()).ToDouble(&temp)) {
+      message +=  wxString::Format(_("Lifetime %d must be a valid number.\n"), i+1);
+      ok = false;
+    }
+  }
+  msg->SetLabel(message);
+  sizer->Layout();
+  sizer->Fit(this);
+  if (ok) {
+    EndModal(true);
+  }
 }
 
 void CompDialog::OnNo(wxCommandEvent &) {
+  EndModal(false);
 }
 
 void CompDialog::OnSpin(wxSpinEvent& evt) {
