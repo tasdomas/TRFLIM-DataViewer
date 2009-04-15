@@ -21,11 +21,22 @@ ComponentsPanel::ComponentsPanel(wxWindow * parent, wxWindowID id)
 ComponentsPanel::~ComponentsPanel() {
 }
 
-void ComponentsPanel::SetImage(ComponentBlock * image) {
+void ComponentsPanel::SetImage(DataBlock * image) {
+  block = new ComponentBlock(image);
 }
 
 void ComponentsPanel::Compute(wxCommandEvent &) {
-  CompDialog * parameters = new CompDialog(this, wxID_ANY);
-  parameters->ShowModal();
-  parameters->Destroy();
+  if (block != NULL) {
+    CompDialog * parameters = new CompDialog(this, wxID_ANY);
+    if (parameters->ShowModal()) {
+      vector<float> lifetimes = parameters->GetLifetimes();
+      float sigma = parameters->GetSigma();
+      int count = parameters->GetCount();
+
+      ((ComponentBlock*)block)->Compute(sigma, count, lifetimes);
+    }
+    parameters->Destroy();
+  } else {
+    wxMessageBox(_("Load the data file first"));
+  }
 }

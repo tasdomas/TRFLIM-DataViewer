@@ -33,9 +33,10 @@ ComponentBlock::~ComponentBlock() {
 }
 
 void ComponentBlock::ConstructIRF() {
-  IRF = new Matrix(components, components);
-  for (int i = 0; i < components; i++) {
-    for (int j = 0; j < components; j++) {
+  int time = original->GetZ();
+  IRF = new Matrix(time, time);
+  for (int i = 0; i < time; i++) {
+    for (int j = 0; j < time; j++) {
       if (i == j) {
         float value = 0.5 + (1 + erf((float)i / sigma_t));
         IRF->element(i, j) = 1/value;

@@ -52,7 +52,7 @@ class ComponentsPanel : public ImagePanel {
   ComponentsPanel(wxWindow * parent, wxWindowID = wxID_ANY);
   ~ComponentsPanel();
 
-  void SetImage(ComponentBlock * image);
+  void SetImage(DataBlock * image);
   void Compute(wxCommandEvent &);
   DECLARE_EVENT_TABLE()
  protected:

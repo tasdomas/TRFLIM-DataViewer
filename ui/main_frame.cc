@@ -97,6 +97,8 @@ void MainFrame::UpdateSDT(string fileName) {
   }
   fwhm = new FWHMBlock(dataFile->GetDataBlock(0));
   fwhmPanel->SetImage(fwhm);
+  
+  componentsPanel->SetImage(dataFile->GetDataBlock(0));
 
 
 }
@@ -111,6 +113,7 @@ void MainFrame::OnBlockSelect(wxSpinEvent& evt) {
   }
   fwhm = new FWHMBlock(dataFile->GetDataBlock(pos));
   fwhmPanel->SetImage(fwhm);
+  componentsPanel->SetImage(dataFile->GetDataBlock(pos));
   wxEndBusyCursor();
 }
 

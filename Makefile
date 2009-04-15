@@ -19,7 +19,7 @@ MAIN_OBJECTS = main/main.o
 
 INCLUDE_OBJECTS = include/newmat/libnewmat.a
 
-LIB_OBJECTS = lib/fwhmblock.o lib/exception.o
+LIB_OBJECTS = lib/fwhmblock.o lib/exception.o lib/componentblock.o
 
 UI_OBJECTS = ui/canvas.o ui/main_frame.o ui/datapanel.o ui/imagepanel.o ui/scaleframe.o ui/grayscalepanel.o ui/componentspanel.o ui/compdialog.o
 
