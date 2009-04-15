@@ -56,15 +56,29 @@ CompDialog::~CompDialog() {
 }
 
 int CompDialog::GetCount() {
-  return 0;
+  return lifetimes.size();
 }
 
 float CompDialog::GetSigma() {
-  return 0.0;
+  double val;
+  if ((sigma->GetValue()).ToDouble(&val)) {
+    return val;
+  } else {
+    return 0.0;
+  }
 }
 
 vector<float> CompDialog::GetLifetimes() {
-
+  vector<float> ret;
+  for (int i = 0; i < lifetimes.size(); i++) {
+    double val;
+    if ((lifetimes[i]->GetValue()).ToDouble(&val)) {
+      ret.push_back(val);
+    } else {
+      ret.push_back(0.0);
+    }
+  }
+  return ret;
 }
 
 void CompDialog::OnYes(wxCommandEvent &) {
