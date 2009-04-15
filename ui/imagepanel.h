@@ -3,6 +3,7 @@
 
 #include "wx/wx.h"
 #include "canvas.h"
+#include "compdialog.h"
 #include "../fileformat/datablock.h"
 #include "../lib/componentblock.h"
 #include "wx/spinctrl.h"
@@ -52,6 +53,8 @@ class ComponentsPanel : public ImagePanel {
   ~ComponentsPanel();
 
   void SetImage(ComponentBlock * image);
+  void Compute(wxCommandEvent &);
+  DECLARE_EVENT_TABLE()
  protected:
   wxSpinCtrl * compNo;
   wxButton * btnCompute;

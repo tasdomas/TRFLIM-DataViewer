@@ -12,7 +12,10 @@ enum {
   ID_Load,
   ID_Scale,
   ID_ComputeComponents,
-  ID_ComponentNo
+  ID_ComponentNo,
+  ID_CD_CompCount,
+  ID_CD_Yes,
+  ID_CD_No  
 };
 
 

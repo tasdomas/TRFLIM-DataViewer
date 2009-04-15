@@ -21,7 +21,7 @@ INCLUDE_OBJECTS = include/newmat/libnewmat.a
 
 LIB_OBJECTS = lib/fwhmblock.o lib/exception.o
 
-UI_OBJECTS = ui/canvas.o ui/main_frame.o ui/datapanel.o ui/imagepanel.o ui/scaleframe.o ui/grayscalepanel.o ui/componentspanel.o
+UI_OBJECTS = ui/canvas.o ui/main_frame.o ui/datapanel.o ui/imagepanel.o ui/scaleframe.o ui/grayscalepanel.o ui/componentspanel.o ui/compdialog.o
 
 OBJECTS = $(FILEFORMAT_OBJECTS) $(UI_OBJECTS) $(LIB_OBJECTS) $(INCLUDE_OBJECTS)
 

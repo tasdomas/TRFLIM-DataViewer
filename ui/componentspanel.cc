@@ -1,6 +1,10 @@
 #include "imagepanel.h"
 #include "enums.h"
 
+BEGIN_EVENT_TABLE(ComponentsPanel, ImagePanel)
+EVT_BUTTON(ID_ComputeComponents, ComponentsPanel::Compute)
+END_EVENT_TABLE()
+
 ComponentsPanel::ComponentsPanel(wxWindow * parent, wxWindowID id) 
   : ImagePanel(parent, id) {
   
@@ -19,4 +23,9 @@ ComponentsPanel::~ComponentsPanel() {
 
 void ComponentsPanel::SetImage(ComponentBlock * image) {
 }
-  
+
+void ComponentsPanel::Compute(wxCommandEvent &) {
+  CompDialog * parameters = new CompDialog(this, wxID_ANY);
+  parameters->ShowModal();
+  parameters->Destroy();
+}
