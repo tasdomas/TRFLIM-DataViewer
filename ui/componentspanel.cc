@@ -3,6 +3,7 @@
 
 BEGIN_EVENT_TABLE(ComponentsPanel, ImagePanel)
 EVT_BUTTON(ID_ComputeComponents, ComponentsPanel::Compute)
+EVT_SPINCTRL(ID_ComponentNo, ComponentsPanel::ChangeComponent)
 END_EVENT_TABLE()
 
 ComponentsPanel::ComponentsPanel(wxWindow * parent, wxWindowID id) 
@@ -35,10 +36,22 @@ void ComponentsPanel::Compute(wxCommandEvent &) {
 
       ((ComponentBlock*)block)->Compute(sigma, count, lifetimes);
       canvas->SetImage(block->GetImage(0), block->GetX(), block->GetY());
+      canvas->Zoom(zoom);
+      canvas->Refresh();
+
+      compNo->SetRange(1, count);
+      compNo->SetValue(1);
     }
     parameters->Destroy();
 
   } else {
     wxMessageBox(_("Load the data file first"));
   }
+}
+
+void ComponentsPanel::ChangeComponent(wxSpinEvent & evt) {
+  canvas->SetImage(block->GetImage(evt.GetPosition()-1), block->GetX(), block->GetY());
+  canvas->Zoom(zoom);
+  canvas->Refresh();
+
 }

@@ -54,6 +54,7 @@ class ComponentsPanel : public ImagePanel {
 
   void SetImage(DataBlock * image);
   void Compute(wxCommandEvent &);
+  void ChangeComponent(wxSpinEvent & evt);
   DECLARE_EVENT_TABLE()
  protected:
   wxSpinCtrl * compNo;
