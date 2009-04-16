@@ -32,9 +32,12 @@ class ComponentBlock : public DataBlock {
   void RemoveIRF();
   void CreateExponential();
   void InvertExponential();
+  void GetComponents();
+  void DelinearizeData();
 
   Matrix * IRF;
   Matrix * D;
   Matrix * E;
+  Matrix * C;
 };
 #endif

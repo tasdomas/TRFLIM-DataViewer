@@ -2,7 +2,7 @@
 
 ComponentBlock::ComponentBlock(DataBlock * data)
   : DataBlock(data->GetX(), data->GetY(), 1),
-    original(data), IRF(NULL), D(NULL), E(NULL) {
+    original(data), IRF(NULL), D(NULL), E(NULL), C(NULL) {
 
 
 }
@@ -19,6 +19,8 @@ void ComponentBlock::Compute(float sigma, int count, vector<float> & tau) {
   }
   CreateExponential();
   InvertExponential();
+  GetComponents();
+  DelinearizeData();
 }
 
 
@@ -33,6 +35,10 @@ ComponentBlock::~ComponentBlock() {
 
   if (E != NULL) {
     delete E;
+  }
+
+  if (C != NULL) {
+    delete C;
   }
 }
 
@@ -98,3 +104,31 @@ void ComponentBlock::InvertExponential() {
     *E = V * S * U.t();
   }
 }
+
+void ComponentBlock::GetComponents() {
+  if ((E != NULL) && (D != NULL)) {
+    C = new Matrix();
+    *C = *E * *D;
+
+  }
+}
+  
+void ComponentBlock::DelinearizeData() {
+
+  if (C != NULL) {
+    delete [] block;
+    block = new uushort*[components];
+    size_x = original->GetX();
+    size_y = original->GetY();
+    size_z = components;
+    for (int i = 0; i < components; i++) {
+      block[i] = new uushort[size_x*size_y];
+      for (int y = 0; y < size_y; y++) {
+        for (int x = 0; x < size_x; x++) {
+          block[i][x + y * size_x] = C->element(i, x + y * size_x);
+        }
+      }
+    }
+  }
+}
+      
