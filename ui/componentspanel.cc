@@ -34,8 +34,10 @@ void ComponentsPanel::Compute(wxCommandEvent &) {
       int count = parameters->GetCount();
 
       ((ComponentBlock*)block)->Compute(sigma, count, lifetimes);
+      canvas->SetImage(block->GetImage(0), block->GetX(), block->GetY());
     }
     parameters->Destroy();
+
   } else {
     wxMessageBox(_("Load the data file first"));
   }
