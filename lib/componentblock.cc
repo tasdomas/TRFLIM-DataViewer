@@ -2,7 +2,7 @@
 
 ComponentBlock::ComponentBlock(DataBlock * data)
   : DataBlock(data->GetX(), data->GetY(), 1),
-    original(data), IRF(NULL), D(NULL) {
+    original(data), IRF(NULL), D(NULL), E(NULL) {
 
 
 }
@@ -12,9 +12,13 @@ void ComponentBlock::Compute(float sigma, int count, vector<float> & tau) {
   sigma_t = sigma;
   components = count;
 
-  ConstructIRF();
   LinearizeData();
-  RemoveIRF();
+  if (sigma != 0.0) {
+    ConstructIRF();
+    RemoveIRF();
+  }
+  CreateExponential();
+  InvertExponential();
 }
 
 
@@ -75,5 +79,22 @@ void ComponentBlock::CreateExponential() {
       E->element(time, comp) = exp(- (float) time / lifetimes[comp]);
     }
   }
-  *E = E->i();
+
+  
+  //*E = E->i();
+}
+
+
+void ComponentBlock::InvertExponential() {
+  if (E != NULL) {
+    Matrix U, V;
+    DiagonalMatrix S;
+    SVD(*E, S, U, V, false);
+    for (int i = 0; i < S.nrows(); i++) {
+      if (S.element(i,i) != 0) {
+        S.element(i,i) = 1 / S.element(i,i);
+      }
+    }
+    *E = V * S * U.t();
+  }
 }

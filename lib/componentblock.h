@@ -3,9 +3,12 @@
 
 #include "../fileformat/datablock.h"
 #include "../include/newmat/newmat.h"
+#include "../include/newmat/newmatap.h"
 
 #include <math.h>
 #include <vector>
+
+#define WANT_MATH
 using namespace std;
 
 class ComponentBlock : public DataBlock {
@@ -28,6 +31,7 @@ class ComponentBlock : public DataBlock {
   void LinearizeData(); //linearize datablock, reducing a set of matrices to a single matrix
   void RemoveIRF();
   void CreateExponential();
+  void InvertExponential();
 
   Matrix * IRF;
   Matrix * D;
