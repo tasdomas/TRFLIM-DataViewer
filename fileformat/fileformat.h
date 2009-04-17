@@ -11,6 +11,10 @@
 
 using namespace std;
 
+float rd_fl (istream &is) throw (BasicException);
+uushort rd_sh (istream &is) throw (BasicException);
+uulong rd_l (istream &is) throw (BasicException);
+
 class FileHeader {
 public:
   uushort revision;

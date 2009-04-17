@@ -1,4 +1,8 @@
-CXX = g++
+#CXX = g++
+#RANLIB = ranlib
+CXX = i586-mingw32msvc-g++
+RANLIB = i586-mingw32msvc-ranlib
+
 CXXFLAGS = -O2 -Wall
 
 DIFF = ./sdiff
@@ -15,7 +19,7 @@ newmat_lobj = newmat1.o newmat2.o newmat3.o newmat4.o newmat5.o newmat6.o newmat
 
 libnewmat.a:   	$(newmat_lobj)
 		$(AR) -cr $@ $(newmat_lobj)
-		ranlib $@
+		$(RANLIB) $@
 
 tmt_obj = tmt.o tmt1.o tmt2.o tmt3.o tmt4.o tmt5.o tmt6.o tmt7.o tmt8.o tmt9.o tmta.o tmtb.o tmtc.o tmtd.o tmte.o tmtf.o tmtg.o tmth.o tmti.o tmtj.o tmtk.o tmtl.o tmtm.o
 

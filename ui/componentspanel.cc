@@ -30,6 +30,7 @@ void ComponentsPanel::Compute(wxCommandEvent &) {
   if (block != NULL) {
     CompDialog * parameters = new CompDialog(this, wxID_ANY);
     if (parameters->ShowModal()) {
+      wxBeginBusyCursor();
       vector<float> lifetimes = parameters->GetLifetimes();
       float sigma = parameters->GetSigma();
       int count = parameters->GetCount();
@@ -41,6 +42,7 @@ void ComponentsPanel::Compute(wxCommandEvent &) {
 
       compNo->SetRange(1, count);
       compNo->SetValue(1);
+      wxEndBusyCursor();
     }
     parameters->Destroy();
 
