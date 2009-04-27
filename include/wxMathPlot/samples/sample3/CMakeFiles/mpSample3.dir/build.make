@@ -81,7 +81,7 @@ mpSample3_OBJECTS = \
 mpSample3_EXTERNAL_OBJECTS =
 
 samples/sample3/mpSample3: samples/sample3/CMakeFiles/mpSample3.dir/sample3.o
-samples/sample3/mpSample3: libmathplot.so
+samples/sample3/mpSample3: libmathplot.a
 samples/sample3/mpSample3: samples/sample3/CMakeFiles/mpSample3.dir/build.make
 samples/sample3/mpSample3: samples/sample3/CMakeFiles/mpSample3.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable mpSample3"

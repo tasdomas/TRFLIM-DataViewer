@@ -23,7 +23,7 @@ CMAKE_BACKWARDS_COMPATIBILITY:STRING=2.4
 
 //Choose the type of build, options are: None(CMAKE_CXX_FLAGS or
 // CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel.
-CMAKE_BUILD_TYPE:STRING=Debug Release
+CMAKE_BUILD_TYPE:STRING=
 
 //Enable/Disable color output during build.
 CMAKE_COLOR_MAKEFILE:BOOL=ON
@@ -165,7 +165,7 @@ LINUX_64_32_CROSSCOMPILE:BOOL=OFF
 MATHPLOT_SHARED:BOOL=OFF
 
 //Build examples?
-WXMATHPLOT_BUILD_EXAMPLES:BOOL=OFF
+WXMATHPLOT_BUILD_EXAMPLES:BOOL=ON
 
 //Dependencies for the target
 mathplot_LIB_DEPENDS:STATIC=general;-pthread;general;-Wl,-Bsymbolic-functions;general;-lwx_baseu-2.8;general;-lwx_gtk2u_core-2.8;
@@ -278,7 +278,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //Advanced flag for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=1
+CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=5
 //Advanced flag for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //Advanced flag for variable: CMAKE_OBJDUMP
