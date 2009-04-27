@@ -1,5 +1,5 @@
-#COMPILER = g++
-COMPILER = i586-mingw32msvc-g++
+COMPILER = g++
+#COMPILER = i586-mingw32msvc-g++
 CCFLAGS = -g -ansi -W -Wall
 LIBFLAGS = -lm
 

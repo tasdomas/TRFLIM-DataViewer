@@ -5,6 +5,7 @@
 #include "datablock.h"
 
 #include <string.h>
+#include <stdio.h>
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -17,6 +18,7 @@ class SDT {
     SDT(string fname);
     ~SDT();
     int GetSetupParam(string param);
+    float GetSetupParamFl(string param);
     DataBlock * GetDataBlock(int i = 0);
     int GetBlockCount();
     string GetSetupData();

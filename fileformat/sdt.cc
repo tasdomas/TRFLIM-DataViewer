@@ -81,6 +81,27 @@ int SDT::GetSetupParam(string param) {
   return out;
 }
 
+float SDT::GetSetupParamFl(string param) {
+  char * pos = strstr(setup, param.c_str());
+  pos += param.length() + 3;
+
+  char str[20];
+  for (int i = 0; i < 20; i++) {
+    str[i] = 0;
+  }
+
+  int i = 0;
+  while (*pos != ']') {
+    str[i] = *pos;
+    i++;
+  }
+
+  float rez;
+  sscanf(str, "%f", &rez);
+
+  return rez;
+}
+
 DataBlock * SDT::GetDataBlock(int i) {
   if (i < header.data_count) {
     return &data[i];

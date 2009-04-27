@@ -52,8 +52,10 @@ void ComponentsPanel::Compute(wxCommandEvent &) {
 }
 
 void ComponentsPanel::ChangeComponent(wxSpinEvent & evt) {
-  canvas->SetImage(block->GetImage(evt.GetPosition()-1), block->GetX(), block->GetY());
-  canvas->Zoom(zoom);
-  canvas->Refresh();
+  if (block != NULL) {
+    canvas->SetImage(block->GetImage(evt.GetPosition()-1), block->GetX(), block->GetY());
+    canvas->Zoom(zoom);
+    canvas->Refresh();
+  }
 
 }
