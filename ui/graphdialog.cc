@@ -10,18 +10,18 @@ GraphDialog::GraphDialog(wxWindow * parent, wxWindowID id)
   wxBoxSizer * sizer = new wxBoxSizer(wxVERTICAL);
 
   plot = new mpWindow(this, -1);
-  plot->SetMargins(0,0,30,100);
+  plot->SetMargins(0,0,100,100);
+
+  plot->LockAspect(true);
 
   sizer->Add(plot, 1, wxEXPAND);
   mpScaleX * scaleX = new mpScaleX(_("time (ns)"), mpALIGN_BORDER_BOTTOM, true);
-  mpScaleY * scaleY = new mpScaleY(_("photon count"), mpALIGN_LEFT, true);
+  mpScaleY * scaleY = new mpScaleY(_("photon count"), mpALIGN_BORDER_LEFT, true);
   plot->AddLayer(scaleX);
   plot->AddLayer(scaleY);
 
-
-
   data = new mpFXYVector();
-  data->SetDrawOutsideMargins(true);
+  data->SetDrawOutsideMargins(false);
   plot->AddLayer(data);
 
   SetSizer(sizer);
@@ -32,6 +32,7 @@ GraphDialog::~GraphDialog() {
 
 void GraphDialog::SetGraph(vector<float> x, vector<float> y) {
   data->SetData(x, y);
+  data->SetDrawOutsideMargins(false);
   data->SetContinuity(true);
-  plot->UpdateAll();
+  plot->Fit();
 }

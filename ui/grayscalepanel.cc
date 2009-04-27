@@ -1,12 +1,35 @@
 #include "imagepanel.h"
 #include "enums.h"
 
+DEFINE_EVENT_TYPE(POINT_EVT);
+IMPLEMENT_DYNAMIC_CLASS( PointEvent, wxCommandEvent )
+
+PointEvent::PointEvent(WXTYPE commandEventType, int id, int px, int py) 
+  : wxCommandEvent(commandEventType, id) {
+  x = px;
+  y = py;
+}
+
+int PointEvent::GetX() {
+  return x;
+}
+
+int PointEvent::GetY() {
+  return y;
+}
+
+PointEvent* PointEvent::Clone() { 
+  return new PointEvent(*this); 
+}
+
 BEGIN_EVENT_TABLE(GrayScalePanel, ImagePanel)
 EVT_COMMAND_SCROLL(ID_Slide, GrayScalePanel::OnSlide)
+EVT_POINT_EVENT(GrayScalePanel::OnCtrlClick)
 END_EVENT_TABLE()
 
-GrayScalePanel::GrayScalePanel(wxWindow * parent, wxWindowID id, bool multiImage) 
-: ImagePanel(parent, id), multi(multiImage) {
+GrayScalePanel::GrayScalePanel(wxWindow * parent, wxWindowID id, 
+                               bool multiImage, bool clickPlot) 
+: ImagePanel(parent, id), multi(multiImage), clickPlotting(clickPlot) {
   if (multiImage) {
     wxBoxSizer * scrollSizer = new wxBoxSizer(wxHORIZONTAL);
     scroller = new wxScrollBar(this, ID_Slide);
@@ -51,4 +74,8 @@ void GrayScalePanel::SetImage(DataBlock * image) {
     canvas->Zoom(zoom);
   }
   
+}
+
+void GrayScalePanel::OnCtrlClick(PointEvent & evt) {
+  wxMessageBox(_("ok"));
 }
