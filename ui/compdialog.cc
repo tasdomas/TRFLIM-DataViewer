@@ -15,7 +15,7 @@ CompDialog::CompDialog(wxWindow * parent, wxWindowID id)
   sizer = new wxBoxSizer(wxVERTICAL);
 
   //sigma for the IRF
-  wxStaticText * label = new wxStaticText(this, wxID_ANY,  _("IRF sigma:"));
+  wxStaticText * label = new wxStaticText(this, wxID_ANY,  _("IRF sigma (ns):"));
   sizer->Add(label);
   sigma = new wxTextCtrl(this, wxID_ANY);
   sizer->Add(sigma);
@@ -27,7 +27,7 @@ CompDialog::CompDialog(wxWindow * parent, wxWindowID id)
                          wxSP_ARROW_KEYS, 1, 6, 2);
   sizer->Add(count);
   
-  label = new wxStaticText(this, wxID_ANY,  _("Component lifetimes:"));
+  label = new wxStaticText(this, wxID_ANY,  _("Component lifetimes (ns):"));
   sizer->Add(label);
 
   for (int i = 0; i < 2; i++) {

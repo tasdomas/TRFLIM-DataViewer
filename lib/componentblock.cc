@@ -4,6 +4,8 @@ ComponentBlock::ComponentBlock(DataBlock * data)
   : DataBlock(data->GetX(), data->GetY(), 1),
     original(data), IRF(NULL), D(NULL), E(NULL), C(NULL) {
 
+  time_step = data->GetTimeScale();
+
 
 }
 
@@ -48,7 +50,7 @@ void ComponentBlock::ConstructIRF() {
   for (int i = 0; i < time; i++) {
     for (int j = 0; j < time; j++) {
       if (i == j) {
-        float value = 0.5 + (1 + erf((float)i / sigma_t));
+        float value = 0.5 + (1 + erf(((float)i*time_step) / sigma_t));
         IRF->element(i, j) = 1/value;
       } else {
         IRF->element(i, j) = 0.0;
@@ -82,7 +84,7 @@ void ComponentBlock::CreateExponential() {
 
   for (int time = 0; time < original->GetZ(); time++) {
     for (int comp = 0; comp < components; comp++) {
-      E->element(time, comp) = exp(- (float) time / lifetimes[comp]);
+      E->element(time, comp) = exp(- ((float) time*time_step) / lifetimes[comp]);
     }
   }
 
