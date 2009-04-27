@@ -152,45 +152,6 @@ mathplot/fast:
 	$(MAKE) -f CMakeFiles/mathplot.dir/build.make CMakeFiles/mathplot.dir/build
 .PHONY : mathplot/fast
 
-#=============================================================================
-# Target rules for targets named mpSample1
-
-# Build rule for target.
-mpSample1: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 mpSample1
-.PHONY : mpSample1
-
-# fast build rule for target.
-mpSample1/fast:
-	$(MAKE) -f samples/sample1/CMakeFiles/mpSample1.dir/build.make samples/sample1/CMakeFiles/mpSample1.dir/build
-.PHONY : mpSample1/fast
-
-#=============================================================================
-# Target rules for targets named mpSample2
-
-# Build rule for target.
-mpSample2: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 mpSample2
-.PHONY : mpSample2
-
-# fast build rule for target.
-mpSample2/fast:
-	$(MAKE) -f samples/sample2/CMakeFiles/mpSample2.dir/build.make samples/sample2/CMakeFiles/mpSample2.dir/build
-.PHONY : mpSample2/fast
-
-#=============================================================================
-# Target rules for targets named mpSample3
-
-# Build rule for target.
-mpSample3: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 mpSample3
-.PHONY : mpSample3
-
-# fast build rule for target.
-mpSample3/fast:
-	$(MAKE) -f samples/sample3/CMakeFiles/mpSample3.dir/build.make samples/sample3/CMakeFiles/mpSample3.dir/build
-.PHONY : mpSample3/fast
-
 # target to build an object file
 mathplot.o:
 	$(MAKE) -f CMakeFiles/mathplot.dir/build.make CMakeFiles/mathplot.dir/mathplot.o
@@ -219,9 +180,6 @@ help:
 	@echo "... list_install_components"
 	@echo "... mathplot"
 	@echo "... rebuild_cache"
-	@echo "... mpSample1"
-	@echo "... mpSample2"
-	@echo "... mpSample3"
 	@echo "... mathplot.o"
 	@echo "... mathplot.i"
 	@echo "... mathplot.s"

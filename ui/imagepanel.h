@@ -4,6 +4,7 @@
 #include "wx/wx.h"
 #include "canvas.h"
 #include "compdialog.h"
+#include "graphdialog.h"
 #include "../fileformat/datablock.h"
 #include "../lib/componentblock.h"
 #include "wx/spinctrl.h"

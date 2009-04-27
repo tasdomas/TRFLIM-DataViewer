@@ -11,10 +11,6 @@ SET(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/CMakeCXXCompiler.cmake"
   "CMakeFiles/CMakeSystem.cmake"
   "CMakeLists.txt"
-  "samples/CMakeLists.txt"
-  "samples/sample1/CMakeLists.txt"
-  "samples/sample2/CMakeLists.txt"
-  "samples/sample3/CMakeLists.txt"
   "/usr/share/cmake-2.6/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-2.6/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake-2.6/Modules/CMakeCommonLanguageInclude.cmake"
@@ -34,16 +30,9 @@ SET(CMAKE_MAKEFILE_OUTPUTS
   "Makefile"
   "CMakeFiles/cmake.check_cache"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
-  "samples/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "samples/sample1/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "samples/sample2/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "samples/sample3/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 SET(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/mathplot.dir/DependInfo.cmake"
-  "samples/sample1/CMakeFiles/mpSample1.dir/DependInfo.cmake"
-  "samples/sample2/CMakeFiles/mpSample2.dir/DependInfo.cmake"
-  "samples/sample3/CMakeFiles/mpSample3.dir/DependInfo.cmake"
   )

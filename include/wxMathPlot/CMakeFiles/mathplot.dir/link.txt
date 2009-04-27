@@ -1,1 +1,2 @@
-/usr/bin/c++  -fPIC  -pthread  -shared -Wl,-soname,libmathplot.so -o libmathplot.so CMakeFiles/mathplot.dir/mathplot.o -pthread -Wl,-Bsymbolic-functions -lwx_baseu-2.8 -lwx_gtk2u_core-2.8 
+/usr/bin/ar cr libmathplot.a  CMakeFiles/mathplot.dir/mathplot.o
+/usr/bin/ranlib libmathplot.a

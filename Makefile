@@ -11,17 +11,17 @@ WX_CXXFLAGS = $(shell wx-config --cxxflags)
 
 
 
-LIBRARIES = main/ fileformat/ ui/ lib/ include/newmat/
+LIBRARIES = main/ fileformat/ ui/ lib/ include/newmat/ include/wxMathPlot
 
 FILEFORMAT_OBJECTS = fileformat/fileformat.o fileformat/sdt.o fileformat/datablock.o
 
 MAIN_OBJECTS = main/main.o
 
-INCLUDE_OBJECTS = include/newmat/libnewmat.a
+INCLUDE_OBJECTS = include/newmat/libnewmat.a include/wxMathPlot/libmathplot.a
 
 LIB_OBJECTS = lib/fwhmblock.o lib/exception.o lib/componentblock.o
 
-UI_OBJECTS = ui/canvas.o ui/main_frame.o ui/datapanel.o ui/imagepanel.o ui/scaleframe.o ui/grayscalepanel.o ui/componentspanel.o ui/compdialog.o
+UI_OBJECTS = ui/canvas.o ui/main_frame.o ui/datapanel.o ui/imagepanel.o ui/scaleframe.o ui/grayscalepanel.o ui/componentspanel.o ui/compdialog.o ui/graphdialog.o 
 
 OBJECTS = $(FILEFORMAT_OBJECTS) $(UI_OBJECTS) $(LIB_OBJECTS) $(INCLUDE_OBJECTS)
 
@@ -38,6 +38,8 @@ test: $(LIBRARIES)
 dv: $(LIBRARIES)
 	$(COMPILER) $(OBJECTS) ui/app.o $(WX_LIBS) $(LIBFLAGS) -o $@
 
+test_app:  $(LIBRARIES)
+	$(COMPILER) $(OBJECTS) ui/test_app.o $(WX_LIBS) $(LIBFLAGS) -o $@
 
 $(LIBRARIES) :
 	$(MAKE) --directory=$@
