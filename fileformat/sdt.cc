@@ -29,7 +29,8 @@ SDT::SDT(string fname) {
         data_headers[i].block_length / 2, 
         GetSetupParam("SP_SCAN_X"),
         GetSetupParam("SP_SCAN_Y"),
-        GetSetupParam("SP_ADC_RE"));
+        GetSetupParam("SP_ADC_RE"),
+        GetSetupParamFl("SP_TAC_TC"));
 
     data.push_back(img);
     delete [] data_block;
@@ -94,6 +95,7 @@ float SDT::GetSetupParamFl(string param) {
   while (*pos != ']') {
     str[i] = *pos;
     i++;
+    pos++;
   }
 
   float rez;

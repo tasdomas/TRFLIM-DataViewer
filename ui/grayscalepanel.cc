@@ -24,7 +24,9 @@ void GrayScalePanel::OnSlide(wxScrollEvent & evt) {
   if (block != NULL) {
     int pos = evt.GetPosition();
 
-    index->SetLabel(wxString::Format(_("%d/%d"), pos+1, block->GetZ()));
+    index->SetLabel(wxString::Format(_("%e/%e"), 
+                                     (float)pos*block->GetTimeScale(), 
+                                     (float)block->GetZ()*block->GetTimeScale()));
 
     canvas->SetImage(block->GetImage(pos), block->GetX(), block->GetY());
     canvas->Zoom(zoom);
@@ -39,7 +41,7 @@ void GrayScalePanel::SetImage(DataBlock * image) {
   
   if (multi) {
     scroller->SetScrollbar(0, 1, image->GetZ() - 1, 1);
-    index->SetLabel(wxString::Format(_("%d/%d"), 1, block->GetZ()));
+    index->SetLabel(wxString::Format(_("%e/%e"), 0.0, (float)block->GetZ()*block->GetTimeScale()));
 
     canvas->SetImage(block->GetImage(0), block->GetX(), block->GetY());
     canvas->Zoom(zoom);

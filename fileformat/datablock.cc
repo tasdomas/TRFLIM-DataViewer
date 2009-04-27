@@ -1,6 +1,6 @@
 #include "datablock.h"
 
-DataBlock::DataBlock(uushort * data, int size, int scan_x, int scan_y, int adc_res) {
+DataBlock::DataBlock(uushort * data, int size, int scan_x, int scan_y, int adc_res, float time) {
  
   if (size != scan_x * scan_y * adc_res) {
     //throw exception
@@ -21,6 +21,7 @@ DataBlock::DataBlock(uushort * data, int size, int scan_x, int scan_y, int adc_r
   size_x = scan_x;
   size_y = scan_y;
   size_z = adc_res;
+  time_step = time;
 }
 
 DataBlock::DataBlock(int scan_x, int scan_y, int adc_res) {
@@ -39,6 +40,7 @@ DataBlock::DataBlock(const DataBlock & origin) {
   size_x = origin.size_x;
   size_y = origin.size_y;
   size_z = origin.size_z;
+  time_step = origin.time_step;
 
   for (int i = 0; i < origin.size_z; i++) {
     uushort * at_z = new uushort[origin.size_x * origin.size_y];
@@ -57,6 +59,7 @@ DataBlock & DataBlock::operator=(const DataBlock & origin) {
   size_x = origin.size_x;
   size_y = origin.size_y;
   size_z = origin.size_z;
+  time_step = origin.time_step;
 
   for (int i = 0; i < origin.size_z; i++) {
     uushort * at_z = new uushort[origin.size_x * origin.size_y];
@@ -116,4 +119,8 @@ uushort DataBlock::GetPoint(int x, int y, int z) {
     return -1;
     //throw exception!!!
   }
+}
+
+float DataBlock::GetTimeScale() {
+  return time_step;
 }
