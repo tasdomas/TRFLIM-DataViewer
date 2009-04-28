@@ -58,7 +58,7 @@ void DVCanvas::SetImage(DataBlock * block) {
     for (int j = 0; j < block->GetY(); j++) {
       wxImage::HSVValue t (0.75* (1.0 - (float)block->GetPoint(i, j, 1) / smax),
                            1.0,
-                           1.0 - (float)block->GetPoint(i, j, 0) / hmax
+                           (float)block->GetPoint(i, j, 0) / hmax
                            );
       wxImage::RGBValue tt = wxImage::HSVtoRGB(t);
       //char val = 256 * block->GetPoint(i, j, 0) / hmax;
