@@ -137,10 +137,13 @@ void DataBlock::SetData(uushort * data, int size) {
 }
 
 uushort DataBlock::GetPoint(int x, int y, int z) {
-  if ((z >= z_low) && (z < z_high) &&
-      (x >= x_low) && (x < x_high) &&
-      (y >= y_low) && (y < y_high)) {
-    return block[z][x + y*size_x];
+  if ((z >= 0) && (z < GetZ()) &&
+      (x >= 0) && (x < GetX()) &&
+      (y >= 0) && (y < GetY())) {
+    x += x_low;
+    y += y_low;
+    
+    return block[z_low + z][x + y*size_x];
   } else {
     return -1;
     //throw exception!!!
@@ -152,8 +155,8 @@ float DataBlock::GetTimeScale() {
 }
 
 vector<float> DataBlock::GetPoint(int x, int y) {
-  if ((x >= x_low) && (x < x_high) &&
-      (y >= y_low) && (y < y_high)) {
+  if ((x >= 0) && (x < GetX()) &&
+      (y >= 0) && (y < GetY())) {
     vector<float> pts;
     for (int z = 0; z < GetZ(); z++) {
       pts.push_back(GetPoint(x, y, z));
@@ -166,7 +169,7 @@ vector<float> DataBlock::GetTime() {
   if (GetZ() > 0) {
     vector<float> time;
     for (int z = z_low; z < z_high; z++) {
-      time.push_back(z*time_step * 1.0e9);
+      time.push_back((z_low + z)*time_step * 1.0e9);
     }
     return time;
   }

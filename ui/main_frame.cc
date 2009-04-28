@@ -90,6 +90,8 @@ void MainFrame::OnLoad(wxCommandEvent &) {
 }
 
 void MainFrame::UpdateSDT(string fileName) {
+  DataBlock * data = dataFile->GetDataBlock(0);
+
   dataPanel->UpdateData(fileName, dataFile->GetBlockCount() - 1, dataFile->GetSetupData());
   rawPanel->SetImage(dataFile->GetDataBlock(0));
   if (fwhm != NULL) {

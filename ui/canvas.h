@@ -20,7 +20,7 @@ public:
 
   void SetImage(wxImage & img);
 
-  void SetImage(uushort * img, int size_x, int size_y);
+  void SetImage(DataBlock * block, int z);
   void SetImage(DataBlock * block);
   
   void SaveImage(wxString & name, float zoom);

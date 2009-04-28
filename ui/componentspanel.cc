@@ -39,7 +39,7 @@ void ComponentsPanel::Compute(wxCommandEvent &) {
       int count = parameters->GetCount();
 
       ((ComponentBlock*)block)->Compute(sigma, count, lifetimes);
-      canvas->SetImage(block->GetImage(0), block->GetX(), block->GetY());
+      canvas->SetImage(block, 0);
       canvas->Zoom(zoom);
       canvas->Refresh();
 
@@ -56,7 +56,7 @@ void ComponentsPanel::Compute(wxCommandEvent &) {
 
 void ComponentsPanel::ChangeComponent(wxSpinEvent & evt) {
   if (block != NULL) {
-    canvas->SetImage(block->GetImage(evt.GetPosition()-1), block->GetX(), block->GetY());
+    canvas->SetImage(block, evt.GetPosition()-1);
     canvas->Zoom(zoom);
     canvas->Refresh();
   }
