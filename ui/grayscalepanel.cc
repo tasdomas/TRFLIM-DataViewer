@@ -77,5 +77,11 @@ void GrayScalePanel::SetImage(DataBlock * image) {
 }
 
 void GrayScalePanel::OnCtrlClick(PointEvent & evt) {
-  wxMessageBox(_("ok"));
+  if ((clickPlotting) && (block != NULL)) {
+    GraphDialog * dia = new GraphDialog(this, wxID_ANY);
+    
+    dia->SetGraph(block->GetTime(), block->GetPoint(evt.GetX(), evt.GetY()));
+    dia->Show();
+  }
+    
 }

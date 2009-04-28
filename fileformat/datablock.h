@@ -4,6 +4,7 @@
 #include "typedef.h"
 
 #include <stdlib.h>
+#include <vector>
 
 using namespace std;
 
@@ -24,6 +25,9 @@ public:
 
   void SetData(uushort * data, int size);
   float GetTimeScale();
+
+  vector<float> GetPoint(int x, int y);
+  vector<float> GetTime();
 
   int GetX();
   int GetY();

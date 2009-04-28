@@ -129,17 +129,22 @@ void DVCanvas::SaveImage(wxString & name, float zoom) {
 }
 
 void DVCanvas::MouseDown(wxMouseEvent & evt) {
-  if ((image != NULL) && (data != NULL)) {
-    wxPoint pt = evt.GetLogicalPosition(*(new wxClientDC(this)));
+  wxPoint pt = evt.GetLogicalPosition(*(new wxClientDC(this)));
+
+  if ((image != NULL) && (evt.m_controlDown)) {
     float zoom = (float)bitmap->GetWidth() / image->GetWidth();
     pt.x = pt.x / zoom;
     pt.y = pt.y / zoom;
 
-    if (evt.m_controlDown) {
-      PointEvent event(POINT_EVT, 0, pt.x, pt.y);
-      GetEventHandler()->ProcessEvent( event );
-    } else {
-  
+    PointEvent event(POINT_EVT, 0, pt.x, pt.y);
+    GetEventHandler()->ProcessEvent( event );
+  } else {
+
+    if ((image != NULL) && (data != NULL)) {
+      float zoom = (float)bitmap->GetWidth() / image->GetWidth();
+      pt.x = pt.x / zoom;
+      pt.y = pt.y / zoom;
+
       if ((pt.x <= bitmap->GetWidth()) && (pt.y < bitmap->GetHeight())) {
 
         int intensity = data->GetPoint(pt.x, pt.y, 0);

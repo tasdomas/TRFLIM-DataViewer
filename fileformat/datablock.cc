@@ -124,3 +124,24 @@ uushort DataBlock::GetPoint(int x, int y, int z) {
 float DataBlock::GetTimeScale() {
   return time_step;
 }
+
+vector<float> DataBlock::GetPoint(int x, int y) {
+  if ((x >= 0) && (x < size_x) &&
+      (y >= 0) && (y < size_y)) {
+    vector<float> pts;
+    for (int z = 0; z < size_z; z++) {
+      pts.push_back(GetPoint(x, y, z));
+    }
+    return pts;
+  }
+}
+
+vector<float> DataBlock::GetTime() {
+  if (size_z > 0) {
+    vector<float> time;
+    for (int z = 0; z < size_z; z++) {
+      time.push_back(z*time_step * 1.0e9);
+    }
+    return time;
+  }
+}

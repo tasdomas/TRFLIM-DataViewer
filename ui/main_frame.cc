@@ -37,7 +37,7 @@ MainFrame::MainFrame()
     //canvas for displaying images
     book = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxNB_TOP);
 
-    rawPanel = new GrayScalePanel(book, wxID_ANY, TRUE);
+    rawPanel = new GrayScalePanel(book, wxID_ANY, TRUE, TRUE);
     fwhmPanel = new GrayScalePanel(book, wxID_ANY, FALSE);    
     componentsPanel = new ComponentsPanel(book, wxID_ANY);
 

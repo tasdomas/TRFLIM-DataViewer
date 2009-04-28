@@ -12,7 +12,7 @@ GraphDialog::GraphDialog(wxWindow * parent, wxWindowID id)
   plot = new mpWindow(this, -1);
   plot->SetMargins(0,0,100,100);
 
-  plot->LockAspect(true);
+  plot->LockAspect(false);
 
   sizer->Add(plot, 1, wxEXPAND);
   mpScaleX * scaleX = new mpScaleX(_("time (ns)"), mpALIGN_BORDER_BOTTOM, true);
