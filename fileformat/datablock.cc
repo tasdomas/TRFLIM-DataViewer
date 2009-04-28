@@ -21,6 +21,12 @@ DataBlock::DataBlock(uushort * data, int size, int scan_x, int scan_y, int adc_r
   size_x = scan_x;
   size_y = scan_y;
   size_z = adc_res;
+
+  x_low = y_low = z_low = 0;
+  x_high = size_x;
+  y_high = size_y;
+  z_high = size_z;
+
   time_step = time;
 }
 
@@ -33,6 +39,12 @@ DataBlock::DataBlock(int scan_x, int scan_y, int adc_res) {
   size_x = scan_x;
   size_y = scan_y;
   size_z = adc_res;
+
+  x_low = y_low = z_low = 0;
+  x_high = size_x;
+  y_high = size_y;
+  z_high = size_z;
+  
 }
 
 DataBlock::DataBlock(const DataBlock & origin) {
@@ -49,6 +61,13 @@ DataBlock::DataBlock(const DataBlock & origin) {
     }
     block[i] = at_z;
   }
+
+  x_low = origin.x_low;
+  y_low = origin.y_low;
+  z_low = origin.z_low;  
+  x_high = origin.x_high;  
+  y_high = origin.y_high;  
+  z_high = origin.z_high;  
 }
   
 DataBlock & DataBlock::operator=(const DataBlock & origin) {
@@ -68,6 +87,13 @@ DataBlock & DataBlock::operator=(const DataBlock & origin) {
     }
     block[i] = at_z;
   }
+  x_low = origin.x_low;
+  y_low = origin.y_low;
+  z_low = origin.z_low;  
+  x_high = origin.x_high;  
+  y_high = origin.y_high;  
+  z_high = origin.z_high;  
+
   return *this;
 }
 
@@ -87,15 +113,15 @@ uushort * DataBlock::GetImage(int z) {
 }
 
 int DataBlock::GetX() {
-  return size_x;
+  return x_high - x_low;
 }
 
 int DataBlock::GetY() {
-  return size_y;
+  return y_high - y_low;
 }
 
 int DataBlock::GetZ() {
-  return size_z;
+  return z_high - z_low;
 }
 
 void DataBlock::SetData(uushort * data, int size) {
@@ -111,9 +137,9 @@ void DataBlock::SetData(uushort * data, int size) {
 }
 
 uushort DataBlock::GetPoint(int x, int y, int z) {
-  if ((z >= 0) && (z < size_z) &&
-      (x >= 0) && (x < size_x) &&
-      (y >= 0) && (y < size_y)) {
+  if ((z >= z_low) && (z < z_high) &&
+      (x >= x_low) && (x < x_high) &&
+      (y >= y_low) && (y < y_high)) {
     return block[z][x + y*size_x];
   } else {
     return -1;
@@ -126,10 +152,10 @@ float DataBlock::GetTimeScale() {
 }
 
 vector<float> DataBlock::GetPoint(int x, int y) {
-  if ((x >= 0) && (x < size_x) &&
-      (y >= 0) && (y < size_y)) {
+  if ((x >= x_low) && (x < x_high) &&
+      (y >= y_low) && (y < y_high)) {
     vector<float> pts;
-    for (int z = 0; z < size_z; z++) {
+    for (int z = 0; z < GetZ(); z++) {
       pts.push_back(GetPoint(x, y, z));
     }
     return pts;
@@ -137,11 +163,63 @@ vector<float> DataBlock::GetPoint(int x, int y) {
 }
 
 vector<float> DataBlock::GetTime() {
-  if (size_z > 0) {
+  if (GetZ() > 0) {
     vector<float> time;
-    for (int z = 0; z < size_z; z++) {
+    for (int z = z_low; z < z_high; z++) {
       time.push_back(z*time_step * 1.0e9);
     }
     return time;
   }
+}
+
+void DataBlock::ResetMargins() {
+  x_low = y_low = z_low = 0;
+  x_high = size_x;
+  y_high = size_y;
+  z_high = size_z;
+}
+
+void DataBlock::SetMarginX(int low, int high) {
+  if (high < 0) {
+    high = size_x;
+  }
+  if ((low >= 0) && (high <= size_x)) {
+    x_low = low;
+    x_high = high;
+  }
+}
+
+void DataBlock::SetMarginY(int low, int high) {
+  if (high < 0) {
+    high = size_y;
+  }
+  if ((low >= 0) && (high <= size_y)) {
+    y_low = low;
+    y_high = high;
+  }
+}
+                                    
+void DataBlock::SetMarginZ(int low, int high) {
+  if (high < 0) {
+    high = size_z;
+  }
+  if ((low >= 0) && (high <= size_z)) {
+    z_low = low;
+    z_high = high;
+  }
+}
+                                    
+void DataBlock::GetMarginX(int & low, int & high) {
+  low = x_low;
+  high = x_high;
+}
+
+void DataBlock::GetMarginY(int & low, int & high) {
+  low = y_low;
+  high = y_high;
+}
+
+void DataBlock::GetMarginZ(int & low, int & high) {
+  low = z_low;
+  high = z_high;
 }

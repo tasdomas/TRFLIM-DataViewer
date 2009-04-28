@@ -29,15 +29,32 @@ public:
   vector<float> GetPoint(int x, int y);
   vector<float> GetTime();
 
+  //dimensions of the block
   int GetX();
   int GetY();
   int GetZ();
+
+  //block data margins
+  void SetMarginX(int low=0, int high=-1);
+  void SetMarginY(int low=0, int high=-1);
+  void SetMarginZ(int low=0, int high=-1);
+
+  void ResetMargins();
+
+  void GetMarginX(int & low, int & high);
+  void GetMarginY(int & low, int & high);
+  void GetMarginZ(int & low, int & high);
 
 protected:
   uushort ** block;
   int size_x;
   int size_y;
   int size_z;
+
+  int x_low, x_high;
+  int y_low, y_high;
+  int z_low, z_high;
+
   float time_step;
 
 };
