@@ -17,7 +17,7 @@ FILEFORMAT_OBJECTS = fileformat/fileformat.o fileformat/sdt.o fileformat/datablo
 
 MAIN_OBJECTS = main/main.o
 
-INCLUDE_OBJECTS = include/newmat/libnewmat.a include/wxMathPlot/libmathplot.a
+INCLUDE_OBJECTS = include/newmat/libnewmat.a include/wxMathPlot/mathplot.o
 
 LIB_OBJECTS = lib/fwhmblock.o lib/exception.o lib/componentblock.o
 
