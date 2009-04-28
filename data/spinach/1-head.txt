@@ -1,0 +1,8 @@
+Obj: 50x
+Ex: 800 nm, ? nW Input
+
+Em filters: 800 HR+VIS HT, 800 HR
+
+Scan: X: 60V 128s, Y: 60V 128s, CX: 30V, CY: 35V
+
+Pixel Dwell Time: 10 ms
