@@ -7,6 +7,7 @@ EVT_MENU(ID_Quit, MainFrame::OnQuit)
 EVT_MENU(ID_Load, MainFrame::OnLoad)
 EVT_MENU(ID_Scale, MainFrame::ShowScale)
 EVT_SPINCTRL(ID_BlockNo, MainFrame::OnBlockSelect)
+EVT_BUTTON(ID_Margins, MainFrame::SetMargins)
 
 END_EVENT_TABLE()
 
@@ -90,8 +91,6 @@ void MainFrame::OnLoad(wxCommandEvent &) {
 }
 
 void MainFrame::UpdateSDT(string fileName) {
-  DataBlock * data = dataFile->GetDataBlock(0);
-
   dataPanel->UpdateData(fileName, dataFile->GetBlockCount() - 1, dataFile->GetSetupData());
   rawPanel->SetImage(dataFile->GetDataBlock(0));
   if (fwhm != NULL) {
@@ -101,13 +100,11 @@ void MainFrame::UpdateSDT(string fileName) {
   fwhmPanel->SetImage(fwhm);
   
   componentsPanel->SetImage(dataFile->GetDataBlock(0));
-
-
 }
 
 void MainFrame::OnBlockSelect(wxSpinEvent& evt) {
   wxBeginBusyCursor();
-  int pos = evt.GetPosition();
+  pos = evt.GetPosition();
   
   rawPanel->SetImage(dataFile->GetDataBlock(pos));
   if (fwhm != NULL) {
@@ -123,4 +120,18 @@ void MainFrame::ShowScale(wxCommandEvent&) {
   scaleFrame = new ScaleFrame();
 
   scaleFrame->Show(true);
+}
+
+void MainFrame::SetMargins(wxCommandEvent&) {
+  MarginsDialog * dia = new MarginsDialog(this, wxID_ANY, dataFile->GetDataBlock(pos));
+  dia->ShowModal();
+  dia->Destroy();
+
+  rawPanel->SetImage(dataFile->GetDataBlock(pos));
+  if (fwhm != NULL) {
+    delete fwhm;
+  }
+  fwhm = new FWHMBlock(dataFile->GetDataBlock(pos));
+  fwhmPanel->SetImage(fwhm);
+  componentsPanel->SetImage(dataFile->GetDataBlock(pos));
 }

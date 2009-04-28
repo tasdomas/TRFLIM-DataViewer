@@ -5,6 +5,8 @@
 #include "wx/spinctrl.h"
 #include "../fileformat/sdt.h"
 
+#include "marginsdialog.h"
+
 class DataPanel : public wxPanel {
 public:
   DataPanel(wxWindow * parent, wxWindowID id = wxID_ANY);

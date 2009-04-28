@@ -3,6 +3,7 @@
 
 enum {
   ID_BlockNo = 1,
+  ID_Margins,
   ID_SetupBtn,
   ID_ZoomIn,
   ID_ZoomOut,
@@ -15,7 +16,10 @@ enum {
   ID_ComponentNo,
   ID_CD_CompCount,
   ID_CD_Yes,
-  ID_CD_No  
+  ID_CD_No,
+  ID_MD_Yes,
+  ID_MD_No,
+  ID_MD_Reset
 };
 
 

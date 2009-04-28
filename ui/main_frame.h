@@ -8,6 +8,7 @@
 #include "datapanel.h"
 #include "imagepanel.h"
 #include "scaleframe.h"
+#include "marginsdialog.h"
 
 #include "../fileformat/sdt.h"
 #include "../fileformat/datablock.h"
@@ -35,7 +36,9 @@ class MainFrame : public wxFrame {
     void OnLoad(wxCommandEvent&);
     void ShowScale(wxCommandEvent&);
     void OnBlockSelect(wxSpinEvent& evt);
+    void SetMargins(wxCommandEvent &);
   private:
+    int pos;
     DECLARE_EVENT_TABLE()
 
 };

@@ -1,7 +1,6 @@
 #include "datapanel.h"
 #include "enums.h"
 BEGIN_EVENT_TABLE(DataPanel, wxPanel)
-
 END_EVENT_TABLE()
 
 DataPanel::DataPanel(wxWindow * parent, wxWindowID id)
@@ -21,6 +20,9 @@ DataPanel::DataPanel(wxWindow * parent, wxWindowID id)
   blockNo = new wxSpinCtrl(this, ID_BlockNo, wxEmptyString, wxDefaultPosition, wxDefaultSize,
                            wxSP_VERTICAL | wxSP_WRAP, 0, 0);
   sizer->Add(blockNo, 0, wxEXPAND);
+
+  wxButton * marginsBtn = new wxButton(this, ID_Margins, _("Set margins"));
+  sizer->Add(marginsBtn, 0, wxEXPAND);
 
   setupCtrl = new wxTextCtrl(this, ID_SetupBtn, _(""), 
                              wxDefaultPosition, wxDefaultSize,
