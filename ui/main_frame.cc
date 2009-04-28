@@ -16,7 +16,7 @@ MainFrame::MainFrame()
   scaleFrame(NULL), dataFile(NULL), fwhm(NULL) {
     //the menu
 
-  
+  pos = 0;
     wxMenu * menuData = new wxMenu;
     CreateStatusBar();
 
@@ -67,7 +67,7 @@ void MainFrame::OnQuit(wxCommandEvent &) {
 
 // load file
 void MainFrame::OnLoad(wxCommandEvent &) {
-
+  pos = 0;
   wxString filename = wxFileSelector(
     _("SDT file to open"),
     _(""),

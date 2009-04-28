@@ -8,7 +8,9 @@ END_EVENT_TABLE()
 
 
 MarginsDialog::MarginsDialog(wxWindow * parent, wxWindowID id, DataBlock * block) 
-  : wxDialog(parent, id, _("Data margins")) {
+: wxDialog(parent, id, _("Data margins"),
+           wxDefaultPosition, wxDefaultSize,
+           wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER) {
 
   data = block;
 
