@@ -1,7 +1,7 @@
-CXX = g++
-RANLIB = ranlib
-#CXX = i586-mingw32msvc-g++
-#RANLIB = i586-mingw32msvc-ranlib
+#CXX = g++
+#RANLIB = ranlib
+CXX = i586-mingw32msvc-g++
+RANLIB = i586-mingw32msvc-ranlib
 
 CXXFLAGS = -O2 -Wall
 

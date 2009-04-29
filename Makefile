@@ -1,13 +1,13 @@
-COMPILER = g++
-#COMPILER = i586-mingw32msvc-g++
+#COMPILER = g++
+COMPILER = i586-mingw32msvc-g++
 
 CCFLAGS = -g -ansi -W -Wall
-LIBFLAGS = -lm #--libdir=/usr/local/i586-mingw32/lib
+LIBFLAGS = -lm --libdir=/usr/local/i586-mingw32/lib
 
-WX_LIBS = $(shell wx-config --libs)
-WX_CXXFLAGS = $(shell wx-config --cxxflags)
-#WX_LIBS = $(shell /usr/local/wx-2.8.9-mingw32/bin/wx-config --libs)
-#WX_CXXFLAGS = $(shell /usr/local/wx-2.8.9-mingw32/bin/wx-config --cxxflags)
+#WX_LIBS = $(shell wx-config --libs)
+#WX_CXXFLAGS = $(shell wx-config --cxxflags)
+WX_LIBS = $(shell /usr/local/wx-2.8.9-mingw32/bin/wx-config --libs)
+WX_CXXFLAGS = $(shell /usr/local/wx-2.8.9-mingw32/bin/wx-config --cxxflags)
 
 
 
