@@ -18,7 +18,7 @@ public:
 
 private:
   wxStaticText * fileName;
-  wxSpinCtrl * blockNo;
+  wxChoice * blockNo;
   wxTextCtrl * setupCtrl;
 
 };

@@ -6,7 +6,7 @@ BEGIN_EVENT_TABLE(MainFrame, wxFrame)
 EVT_MENU(ID_Quit, MainFrame::OnQuit)
 EVT_MENU(ID_Load, MainFrame::OnLoad)
 EVT_MENU(ID_Scale, MainFrame::ShowScale)
-EVT_SPINCTRL(ID_BlockNo, MainFrame::OnBlockSelect)
+EVT_CHOICE(ID_BlockNo, MainFrame::OnBlockSelect)
 EVT_BUTTON(ID_Margins, MainFrame::SetMargins)
 
 END_EVENT_TABLE()
@@ -102,9 +102,9 @@ void MainFrame::UpdateSDT(string fileName) {
   componentsPanel->SetImage(dataFile->GetDataBlock(0));
 }
 
-void MainFrame::OnBlockSelect(wxSpinEvent& evt) {
+void MainFrame::OnBlockSelect(wxCommandEvent& evt) {
   wxBeginBusyCursor();
-  pos = evt.GetPosition();
+  pos = evt.GetSelection();
   
   rawPanel->SetImage(dataFile->GetDataBlock(pos));
   if (fwhm != NULL) {
@@ -113,6 +113,7 @@ void MainFrame::OnBlockSelect(wxSpinEvent& evt) {
   fwhm = new FWHMBlock(dataFile->GetDataBlock(pos));
   fwhmPanel->SetImage(fwhm);
   componentsPanel->SetImage(dataFile->GetDataBlock(pos));
+
   wxEndBusyCursor();
 }
 
@@ -123,15 +124,19 @@ void MainFrame::ShowScale(wxCommandEvent&) {
 }
 
 void MainFrame::SetMargins(wxCommandEvent&) {
-  MarginsDialog * dia = new MarginsDialog(this, wxID_ANY, dataFile->GetDataBlock(pos));
-  dia->ShowModal();
-  dia->Destroy();
-
-  rawPanel->SetImage(dataFile->GetDataBlock(pos));
-  if (fwhm != NULL) {
-    delete fwhm;
+  if (dataFile != NULL) {
+    MarginsDialog * dia = new MarginsDialog(this, wxID_ANY, dataFile->GetDataBlock(pos));
+    dia->ShowModal();
+    dia->Destroy();
+    
+    rawPanel->SetImage(dataFile->GetDataBlock(pos));
+    if (fwhm != NULL) {
+      delete fwhm;
+    }
+    fwhm = new FWHMBlock(dataFile->GetDataBlock(pos));
+    fwhmPanel->SetImage(fwhm);
+    componentsPanel->SetImage(dataFile->GetDataBlock(pos));
+  } else {
+    wxMessageBox(_("Load a file first."));
   }
-  fwhm = new FWHMBlock(dataFile->GetDataBlock(pos));
-  fwhmPanel->SetImage(fwhm);
-  componentsPanel->SetImage(dataFile->GetDataBlock(pos));
 }

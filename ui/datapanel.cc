@@ -1,6 +1,7 @@
 #include "datapanel.h"
 #include "enums.h"
 BEGIN_EVENT_TABLE(DataPanel, wxPanel)
+
 END_EVENT_TABLE()
 
 DataPanel::DataPanel(wxWindow * parent, wxWindowID id)
@@ -17,8 +18,8 @@ DataPanel::DataPanel(wxWindow * parent, wxWindowID id)
   text = new wxStaticText(this, wxID_ANY, _("Block:"));
   sizer->Add(text, 0, wxEXPAND);
 
-  blockNo = new wxSpinCtrl(this, ID_BlockNo, wxEmptyString, wxDefaultPosition, wxDefaultSize,
-                           wxSP_VERTICAL, 0, 0);
+  blockNo = new wxChoice(this, ID_BlockNo);
+
   sizer->Add(blockNo, 0, wxEXPAND);
 
   wxButton * marginsBtn = new wxButton(this, ID_Margins, _("Set margins"));
@@ -44,7 +45,12 @@ void DataPanel::UpdateData(string pFileName, int pBlockCount, string pSetupData)
   }
 
   fileName->SetLabel(wxString(name.c_str(), wxConvUTF8));
-  blockNo->SetRange(0, pBlockCount);
+
+  blockNo->Clear();
+  for (int i = 0; i <= pBlockCount; i++) {
+    blockNo->Append(wxString::Format(_("%d"), i));
+  }
+  blockNo->SetSelection(0);
 
   setupCtrl->SetValue(wxString(pSetupData.c_str(), wxConvUTF8));
 }

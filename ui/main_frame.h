@@ -35,7 +35,7 @@ class MainFrame : public wxFrame {
     void OnQuit(wxCommandEvent&);
     void OnLoad(wxCommandEvent&);
     void ShowScale(wxCommandEvent&);
-    void OnBlockSelect(wxSpinEvent& evt);
+    void OnBlockSelect(wxCommandEvent& evt);
     void SetMargins(wxCommandEvent &);
   private:
     int pos;
