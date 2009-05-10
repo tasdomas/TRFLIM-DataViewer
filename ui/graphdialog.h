@@ -2,6 +2,7 @@
 #define DV_GRAPH_DIALOG
 
 #include "wx/wx.h"
+#include "wx/spinctrl.h"
 #include "../include/wxMathPlot/mathplot.h"
 
 #include <vector>
@@ -19,6 +20,11 @@ class GraphDialog : public wxDialog {
  private:
   mpWindow * plot;
   mpFXYVector * data;
+  wxTextCtrl * output;
+  wxButton * btnFit;
+  wxButton * btnSave;
+  wxButton * btnExport;
+  wxSpinCtrl * compCount;
 
 };
 #endif

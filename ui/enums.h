@@ -19,7 +19,11 @@ enum {
   ID_CD_No,
   ID_MD_Yes,
   ID_MD_No,
-  ID_MD_Reset
+  ID_MD_Reset,
+  ID_GD_Count,
+  ID_GD_Fit,
+  ID_GD_Save,
+  ID_GD_Export
 };
 
 
