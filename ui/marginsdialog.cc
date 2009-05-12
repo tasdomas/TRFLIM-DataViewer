@@ -24,7 +24,7 @@ MarginsDialog::MarginsDialog(wxWindow * parent, wxWindowID id, DataBlock * block
   row->Add(text, 1);
   x_low = new wxSpinCtrl(this, wxID_ANY, wxEmptyString,
                          wxDefaultPosition, wxDefaultSize,
-                         wxSP_ARROW_KEYS, 0, block->GetX(), lo);
+                         wxSP_ARROW_KEYS, 0, block->GetTrueX(), lo);
   row->Add(x_low);
   sizer->Add(row, 0, wxEXPAND);
 
@@ -33,7 +33,7 @@ MarginsDialog::MarginsDialog(wxWindow * parent, wxWindowID id, DataBlock * block
   row->Add(text, 1);
   x_high = new wxSpinCtrl(this, wxID_ANY, wxEmptyString,
                          wxDefaultPosition, wxDefaultSize,
-                          wxSP_ARROW_KEYS, 0, block->GetX(), hi);
+                          wxSP_ARROW_KEYS, 0, block->GetTrueX(), hi);
   row->Add(x_high);
   sizer->Add(row, 0, wxEXPAND);
 
@@ -43,7 +43,7 @@ MarginsDialog::MarginsDialog(wxWindow * parent, wxWindowID id, DataBlock * block
   row->Add(text, 1);
   y_low = new wxSpinCtrl(this, wxID_ANY, wxEmptyString,
                          wxDefaultPosition, wxDefaultSize,
-                         wxSP_ARROW_KEYS, 0, block->GetY(), lo);
+                         wxSP_ARROW_KEYS, 0, block->GetTrueY(), lo);
   row->Add(y_low);
   sizer->Add(row, 0, wxEXPAND);
 
@@ -52,7 +52,7 @@ MarginsDialog::MarginsDialog(wxWindow * parent, wxWindowID id, DataBlock * block
   row->Add(text, 1);
   y_high = new wxSpinCtrl(this, wxID_ANY, wxEmptyString,
                          wxDefaultPosition, wxDefaultSize,
-                          wxSP_ARROW_KEYS, 0, block->GetY(), hi);
+                          wxSP_ARROW_KEYS, 0, block->GetTrueY(), hi);
   row->Add(y_high);
   sizer->Add(row, 0, wxEXPAND);
 
@@ -62,7 +62,7 @@ MarginsDialog::MarginsDialog(wxWindow * parent, wxWindowID id, DataBlock * block
   row->Add(text, 1);
   z_low = new wxSpinCtrl(this, wxID_ANY, wxEmptyString,
                          wxDefaultPosition, wxDefaultSize,
-                         wxSP_ARROW_KEYS, 0, block->GetZ(), lo);
+                         wxSP_ARROW_KEYS, 0, block->GetTrueZ(), lo);
   row->Add(z_low);
   sizer->Add(row, 0, wxEXPAND);
 
@@ -71,7 +71,7 @@ MarginsDialog::MarginsDialog(wxWindow * parent, wxWindowID id, DataBlock * block
   row->Add(text, 1);
   z_high = new wxSpinCtrl(this, wxID_ANY, wxEmptyString,
                          wxDefaultPosition, wxDefaultSize,
-                          wxSP_ARROW_KEYS, 0, block->GetZ(), hi);
+                          wxSP_ARROW_KEYS, 0, block->GetTrueZ(), hi);
   row->Add(z_high);
   sizer->Add(row, 0, wxEXPAND);
 

@@ -124,6 +124,18 @@ int DataBlock::GetZ() {
   return z_high - z_low;
 }
 
+int DataBlock::GetTrueX() {
+  return size_x;
+}
+
+int DataBlock::GetTrueY() {
+  return size_y;
+}
+
+int DataBlock::GetTrueZ() {
+  return size_z;
+}
+
 void DataBlock::SetData(uushort * data, int size) {
   if (size_x * size_y * size_z == size) {
     for (int j = 0; j < size_z; j++) {

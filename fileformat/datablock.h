@@ -34,6 +34,11 @@ public:
   int GetY();
   int GetZ();
 
+  //true dimensions (unmargined)
+  int GetTrueX();
+  int GetTrueY();
+  int GetTrueZ();
+
   //block data margins
   void SetMarginX(int low=0, int high=-1);
   void SetMarginY(int low=0, int high=-1);
