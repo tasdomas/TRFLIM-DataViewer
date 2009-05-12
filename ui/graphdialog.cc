@@ -10,7 +10,7 @@ GraphDialog::GraphDialog(wxWindow * parent, wxWindowID id)
   : wxDialog(parent, id, _("Point plot"),
              wxDefaultPosition, wxSize(400, 200),
              wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER),
-    data(NULL), fitter(NULL) {
+  data(NULL), fitter(NULL), fit(NULL) {
 
   wxBoxSizer * sizer = new wxBoxSizer(wxHORIZONTAL);
 
@@ -28,6 +28,11 @@ GraphDialog::GraphDialog(wxWindow * parent, wxWindowID id)
   data = new mpFXYVector();
   data->SetDrawOutsideMargins(false);
   plot->AddLayer(data);
+
+  fit = new mpFXYVector();
+  fit->SetDrawOutsideMargins(false);
+  fit->SetPen(wxPen(*wxRED, 3, wxSHORT_DASH));
+  plot->AddLayer(fit);
 
   wxBoxSizer * right = new wxBoxSizer(wxVERTICAL);
   btnSave = new wxButton(this, ID_GD_Save, _("Save"));
@@ -65,7 +70,6 @@ void GraphDialog::SetGraph(vector<float> x, vector<float> y) {
 
   fitter = new Fitter(x, y);
 
-
   data->SetData(x, y);
   data->SetDrawOutsideMargins(false);
   data->SetContinuity(true);
@@ -77,6 +81,7 @@ void GraphDialog::OnFit(wxCommandEvent &) {
     fitter->SetComponentCount(compCount->GetValue());
     fitter->Fit();
 
+    //show the fit data
     vector<double> params = fitter->GetParameters();
     output->Clear();
 
@@ -89,5 +94,11 @@ void GraphDialog::OnFit(wxCommandEvent &) {
       }
       output->AppendText(t);
     }
+    
+    //plot the fit
+    fit->SetData(fitter->GetTime(), fitter->GetFitted());
+    fit->SetDrawOutsideMargins(false);
+    fit->SetContinuity(true);
+    plot->Fit();
   }
 }

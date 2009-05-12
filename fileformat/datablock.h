@@ -27,7 +27,7 @@ public:
   float GetTimeScale();
 
   vector<float> GetPoint(int x, int y);
-  vector<float> GetTime();
+  vector<float> GetTime(bool offset = true);
 
   //dimensions of the block
   int GetX();

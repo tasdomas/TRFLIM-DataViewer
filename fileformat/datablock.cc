@@ -177,11 +177,17 @@ vector<float> DataBlock::GetPoint(int x, int y) {
   }
 }
 
-vector<float> DataBlock::GetTime() {
+vector<float> DataBlock::GetTime(bool offset) {
+  //remove offset if necessary
+
+  double off = 0.0;
+  if (offset) {
+    off = 1.0;
+  }
   if (GetZ() > 0) {
     vector<float> time;
-    for (int z = z_low; z < z_high; z++) {
-      time.push_back((z_low + z)*time_step * 1.0e9);
+    for (int z = 0; z < z_high - z_low; z++) {
+      time.push_back((z + off*z_low)*time_step * 1.0e9);
     }
     return time;
   }

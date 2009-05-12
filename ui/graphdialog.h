@@ -23,8 +23,10 @@ class GraphDialog : public wxDialog {
 
   DECLARE_EVENT_TABLE()
  private:
+
   mpWindow * plot;
   mpFXYVector * data;
+  mpFXYVector * fit;
   wxTextCtrl * output;
   wxButton * btnFit;
   wxButton * btnSave;

@@ -54,6 +54,22 @@ vector<double> Fitter::GetParameters() {
   return param;
 }
 
+vector<float> Fitter::GetFitted() {
+  vector<float> plot;
+  for (int i = 0; i < size; i++) {
+    plot.push_back((float)Function(x[i], this->components));
+  }
+  return plot;
+}
+
+vector<float> Fitter::GetTime() {
+  vector<float> time;
+  for (int i = 0; i < size; i++) {
+    time.push_back((float)x[i]);
+  }
+  return time;
+}
+
 double Function(double x, double * p) {
   static int count = 0;
   if (p == NULL) {

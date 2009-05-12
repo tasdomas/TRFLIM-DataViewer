@@ -80,7 +80,8 @@ void GrayScalePanel::OnCtrlClick(PointEvent & evt) {
   if ((clickPlotting) && (block != NULL)) {
     GraphDialog * dia = new GraphDialog(this, wxID_ANY);
     
-    dia->SetGraph(block->GetTime(), block->GetPoint(evt.GetX(), evt.GetY()));
+    dia->SetGraph(block->GetTime(false), 
+                  block->GetPoint(evt.GetX(), evt.GetY()));
     dia->Show();
   }
     
