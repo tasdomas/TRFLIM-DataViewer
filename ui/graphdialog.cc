@@ -88,12 +88,15 @@ void GraphDialog::OnFit(wxCommandEvent &) {
     for (int i=0; i < params.size(); i++) {
       wxString t;
       if (i % 2 == 0) {
-        t = wxString::Format(_("A(%d) = %f \n"), i, params[i]);
+        t = wxString::Format(_("A(%d) = %f \n"), i / 2, params[i]);
       } else {
-        t = wxString::Format(_("T(%d) = %f \n"), i, params[i]);        
+        t = wxString::Format(_("T(%d) = %f \n"), i / 2, params[i]);        
       }
       output->AppendText(t);
     }
+
+    output->AppendText(wxString::Format(_("\n Chi squared = %f\n"),
+                                        fitter->Chi()));
     
     //plot the fit
     fit->SetData(fitter->GetTime(), fitter->GetFitted());

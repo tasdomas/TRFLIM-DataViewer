@@ -70,6 +70,16 @@ vector<float> Fitter::GetTime() {
   return time;
 }
 
+double Fitter::Chi() {
+  double chi = 0.0;
+  for (int i = 0; i < size; i++) {
+    double diff = (y[i] - Function(x[i], components));
+    diff *= diff;
+    chi += diff;
+  }
+  return chi;
+}
+
 double Function(double x, double * p) {
   static int count = 0;
   if (p == NULL) {

@@ -24,6 +24,8 @@ class Fitter {
   vector<float> GetFitted();
   vector<float> GetTime();
 
+  double Chi();
+
  private:
   double * x;
   double * y;
