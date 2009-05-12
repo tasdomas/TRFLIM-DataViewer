@@ -20,7 +20,6 @@
  * Make:     For instance: gcc -c lmmin.c; ar rc liblmmin.a lmmin.o
  */
  
-
 #include <stdlib.h>
 #include <math.h>
 #include <float.h>

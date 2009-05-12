@@ -1,11 +1,16 @@
 #include "graphdialog.h"
 
+BEGIN_EVENT_TABLE(GraphDialog, wxDialog)
+EVT_BUTTON(ID_GD_Fit, GraphDialog::OnFit)
+END_EVENT_TABLE()
+
+
 
 GraphDialog::GraphDialog(wxWindow * parent, wxWindowID id) 
   : wxDialog(parent, id, _("Point plot"),
              wxDefaultPosition, wxSize(400, 200),
              wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER),
-    data(NULL) {
+    data(NULL), fitter(NULL) {
 
   wxBoxSizer * sizer = new wxBoxSizer(wxHORIZONTAL);
 
@@ -51,11 +56,38 @@ GraphDialog::GraphDialog(wxWindow * parent, wxWindowID id)
 }
 
 GraphDialog::~GraphDialog() {
+  if (fitter != NULL) {
+    delete fitter;
+  }
 }
 
 void GraphDialog::SetGraph(vector<float> x, vector<float> y) {
+
+  fitter = new Fitter(x, y);
+
+
   data->SetData(x, y);
   data->SetDrawOutsideMargins(false);
   data->SetContinuity(true);
   plot->Fit();
+}
+
+void GraphDialog::OnFit(wxCommandEvent &) {
+  if (fitter != NULL) {
+    fitter->SetComponentCount(compCount->GetValue());
+    fitter->Fit();
+
+    vector<double> params = fitter->GetParameters();
+    output->Clear();
+
+    for (int i=0; i < params.size(); i++) {
+      wxString t;
+      if (i % 2 == 0) {
+        t = wxString::Format(_("A(%d) = %f \n"), i, params[i]);
+      } else {
+        t = wxString::Format(_("T(%d) = %f \n"), i, params[i]);        
+      }
+      output->AppendText(t);
+    }
+  }
 }
