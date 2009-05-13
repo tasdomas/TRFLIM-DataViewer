@@ -47,6 +47,15 @@ DataBlock::DataBlock(int scan_x, int scan_y, int adc_res) {
   
 }
 
+DataBlock::DataBlock() {
+  block = NULL;
+  size_x = size_y = size_z = 0;
+  x_low = y_low = z_low = 0;
+  x_high = y_high = z_high = 0;
+
+  time_step = 0;
+}  
+
 DataBlock::DataBlock(const DataBlock & origin) {
   block = new uushort*[origin.size_z];
   size_x = origin.size_x;
@@ -187,7 +196,7 @@ vector<float> DataBlock::GetTime(bool offset) {
   if (GetZ() > 0) {
     vector<float> time;
     for (int z = 0; z < z_high - z_low; z++) {
-      time.push_back((z + off*z_low)*time_step * 1.0e9);
+      time.push_back((z + off*z_low)*time_step);
     }
     return time;
   }

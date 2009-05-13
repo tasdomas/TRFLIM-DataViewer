@@ -5,6 +5,7 @@ BEGIN_EVENT_TABLE(MainFrame, wxFrame)
 
 EVT_MENU(ID_Quit, MainFrame::OnQuit)
 EVT_MENU(ID_Load, MainFrame::OnLoad)
+EVT_MENU(ID_LoadSimple, MainFrame::OnLoadSimple)
 EVT_MENU(ID_Scale, MainFrame::ShowScale)
 EVT_CHOICE(ID_BlockNo, MainFrame::OnBlockSelect)
 EVT_BUTTON(ID_Margins, MainFrame::SetMargins)
@@ -21,6 +22,7 @@ MainFrame::MainFrame()
     CreateStatusBar();
 
     menuData->Append( ID_Load, _("&Load.."));
+    menuData->Append( ID_LoadSimple, _("&Load Simple.."));
     menuData->AppendSeparator();
     menuData->Append( ID_Quit, _("E&xit"));
 
@@ -86,6 +88,30 @@ void MainFrame::OnLoad(wxCommandEvent &) {
     string file = std::string(filename.mb_str()); 
     dataFile = new SDT(file);
     UpdateSDT(std::string(filename.mb_str()));
+    wxEndBusyCursor();
+  }
+}
+
+void MainFrame::OnLoadSimple(wxCommandEvent&) {
+  pos = 0;
+  wxString filename = wxFileSelector(
+    _(".simple file to open"),
+    _(""),
+    _("plot"),
+    _(""),
+    _("*.simple"),
+    wxFD_OPEN | wxFD_FILE_MUST_EXIST,
+    this
+  ); 
+  if (! filename.empty()) {
+    wxBeginBusyCursor();
+    if (dataFile != NULL) {
+      delete dataFile;
+    }
+
+    string file = std::string(filename.mb_str()); 
+    dataFile = new SimpleSDT(file);
+    UpdateSDT(file);
     wxEndBusyCursor();
   }
 }

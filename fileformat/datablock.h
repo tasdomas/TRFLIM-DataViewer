@@ -14,6 +14,7 @@ class DataBlock {
   friend class FWHMBlock;
 
 public:
+  DataBlock();
   DataBlock(uushort * data, int size, int scan_x, int scan_y, int adc_res, float time);
   DataBlock(int scan_x, int scan_y, int scan_z = 1);
   DataBlock(const DataBlock & origin);

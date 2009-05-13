@@ -46,11 +46,13 @@ ComponentBlock::~ComponentBlock() {
 
 void ComponentBlock::ConstructIRF() {
   int time = original->GetZ();
+  vector<float> t = original->GetTime(false);
+
   IRF = new Matrix(time, time);
   for (int i = 0; i < time; i++) {
     for (int j = 0; j < time; j++) {
       if (i == j) {
-        float value = 0.5 + (1 + erf(((float)i*time_step) / sigma_t));
+        float value = 0.5 + (1 + erf((t[i]) / sigma_t));
         IRF->element(i, j) = 1/value;
       } else {
         IRF->element(i, j) = 0.0;
@@ -80,11 +82,12 @@ void ComponentBlock::CreateExponential() {
   if (E != NULL) {
     delete E;
   }
+  vector<float> t = original->GetTime(false);
   E = new Matrix(original->GetZ(), components);
 
   for (int time = 0; time < original->GetZ(); time++) {
     for (int comp = 0; comp < components; comp++) {
-      E->element(time, comp) = exp(- ((float) time*time_step) / lifetimes[comp]);
+      E->element(time, comp) = exp(- (t[time]) / lifetimes[comp]);
     }
   }
 

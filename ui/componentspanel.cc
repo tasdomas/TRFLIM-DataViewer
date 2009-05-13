@@ -33,9 +33,9 @@ void ComponentsPanel::Compute(wxCommandEvent &) {
       wxBeginBusyCursor();
       vector<float> lifetimes = parameters->GetLifetimes();
       for (int i = 0; i < lifetimes.size(); i++) {
-        lifetimes[i] = lifetimes[i] * 1.0e-9;
+        lifetimes[i] = lifetimes[i];
       }
-      float sigma = parameters->GetSigma() * 1.0e-9;
+      float sigma = parameters->GetSigma();
       int count = parameters->GetCount();
 
       ((ComponentBlock*)block)->Compute(sigma, count, lifetimes);

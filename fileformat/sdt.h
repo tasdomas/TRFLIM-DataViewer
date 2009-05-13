@@ -16,6 +16,7 @@ using namespace std;
 class SDT {
   public:
     SDT(string fname);
+    SDT();
     ~SDT();
     int GetSetupParam(string param);
     float GetSetupParamFl(string param);

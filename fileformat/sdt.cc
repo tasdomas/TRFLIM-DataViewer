@@ -1,5 +1,12 @@
 #include "sdt.h"
 
+SDT::SDT() {
+  file_info = NULL;
+  setup = NULL;
+  data_headers = NULL;
+  meas_blocks = NULL;
+}
+
 SDT::SDT(string fname) {
   fstream in(fname.c_str(), ios::binary | ios::in);
   in.seekg(0);
@@ -113,9 +120,13 @@ DataBlock * SDT::GetDataBlock(int i) {
 }
 
 int SDT::GetBlockCount() {
-  return (int)header.data_count;
+  return data.size();
 }
 
 string SDT::GetSetupData() {
-  return string(setup);
+  if (setup != NULL) {
+    return string(setup);
+  } else {
+    return "";
+  }
 }

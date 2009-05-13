@@ -6,9 +6,13 @@ LIBFLAGS = -lm
 %.o : %.cc
 	$(COMPILER) $(CCFLAGS) -c $<
 
-objects = fileformat.o sdt.o datablock.o
+objects = fileformat.o sdt.o datablock.o simpleblock.o simplesdt.o
 
 all: $(objects) 
+
+simpleblock.o: simpleblock.cc
+
+simplesdt.o: simplesdt.cc
 
 datablock.o: datablock.cc
 

@@ -13,7 +13,7 @@ WX_CXXFLAGS = $(shell wx-config --cxxflags)
 
 LIBRARIES = main/ fileformat/ ui/ lib/ include/newmat/ include/wxMathPlot include/lmfit
 
-FILEFORMAT_OBJECTS = fileformat/fileformat.o fileformat/sdt.o fileformat/datablock.o
+FILEFORMAT_OBJECTS = fileformat/fileformat.o fileformat/sdt.o fileformat/datablock.o fileformat/simplesdt.o fileformat/simpleblock.o
 
 MAIN_OBJECTS = main/main.o
 

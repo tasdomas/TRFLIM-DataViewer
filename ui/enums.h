@@ -11,6 +11,7 @@ enum {
   ID_Slide,
   ID_Quit,
   ID_Load,
+  ID_LoadSimple,
   ID_Scale,
   ID_ComputeComponents,
   ID_ComponentNo,

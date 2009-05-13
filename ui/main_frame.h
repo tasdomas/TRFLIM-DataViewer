@@ -13,6 +13,7 @@
 #include "../fileformat/sdt.h"
 #include "../fileformat/datablock.h"
 #include "../lib/fwhmblock.h"
+#include "../fileformat/simplesdt.h"
 
 class MainFrame : public wxFrame {
   protected:
@@ -34,6 +35,7 @@ class MainFrame : public wxFrame {
 
     void OnQuit(wxCommandEvent&);
     void OnLoad(wxCommandEvent&);
+    void OnLoadSimple(wxCommandEvent&);
     void ShowScale(wxCommandEvent&);
     void OnBlockSelect(wxCommandEvent& evt);
     void SetMargins(wxCommandEvent &);
