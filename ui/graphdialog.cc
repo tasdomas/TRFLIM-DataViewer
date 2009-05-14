@@ -3,6 +3,7 @@
 BEGIN_EVENT_TABLE(GraphDialog, wxDialog)
 EVT_BUTTON(ID_GD_Fit, GraphDialog::OnFit)
 EVT_BUTTON(ID_GD_Save, GraphDialog::OnSave)
+EVT_BUTTON(ID_GD_Export, GraphDialog::OnExport)
 END_EVENT_TABLE()
 
 
@@ -69,6 +70,9 @@ GraphDialog::~GraphDialog() {
 
 void GraphDialog::SetGraph(vector<float> x, vector<float> y) {
 
+  data_x = x;
+  data_y = y;
+
   fitter = new Fitter(x, y);
 
   data->SetData(x, y);
@@ -120,4 +124,28 @@ void GraphDialog::OnSave(wxCommandEvent &) {
   if (! filename.empty()) {
     plot->SaveScreenshot(filename, wxBITMAP_TYPE_PNG, wxDefaultSize, true);
   }
+}
+
+void GraphDialog::OnExport(wxCommandEvent &) {
+  wxString filename = wxFileSelector(
+    _("Nurodykite bylos pavadinimą"),
+    _(""),
+    _(""),
+    _(""),
+    _("*.txt"),
+    wxFD_SAVE | wxFD_OVERWRITE_PROMPT,
+    this
+  );
+
+  ofstream out;
+  out.open(filename.mb_str());
+  out << "#x\ty" << endl;
+
+  int len = data_x.size();
+  
+  for (int i = 0; i < len; i++) {
+    out << data_x[i] << "\t" << data_y[i] << endl;
+  }
+
+  out.close();
 }

@@ -7,6 +7,8 @@
 #include "../include/wxMathPlot/mathplot.h"
 
 #include <vector>
+#include <iostream>
+#include <fstream>
 
 #include "enums.h"
 
@@ -19,6 +21,7 @@ class GraphDialog : public wxDialog {
 
   void OnFit(wxCommandEvent &);
   void OnSave(wxCommandEvent &);
+  void OnExport(wxCommandEvent &);
 
   void SetGraph(vector<float> x, vector<float> y);
 
@@ -34,5 +37,8 @@ class GraphDialog : public wxDialog {
   wxButton * btnExport;
   wxSpinCtrl * compCount;
   Fitter * fitter;
+
+  vector<float> data_x;
+  vector<float> data_y;
 };
 #endif
