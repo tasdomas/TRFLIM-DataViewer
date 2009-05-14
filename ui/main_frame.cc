@@ -9,6 +9,7 @@ EVT_MENU(ID_LoadSimple, MainFrame::OnLoadSimple)
 EVT_MENU(ID_Scale, MainFrame::ShowScale)
 EVT_CHOICE(ID_BlockNo, MainFrame::OnBlockSelect)
 EVT_BUTTON(ID_Margins, MainFrame::SetMargins)
+EVT_BUTTON(ID_Export, MainFrame::OnExport)
 
 END_EVENT_TABLE()
 
@@ -147,6 +148,28 @@ void MainFrame::ShowScale(wxCommandEvent&) {
   scaleFrame = new ScaleFrame();
 
   scaleFrame->Show(true);
+}
+
+void MainFrame::OnExport(wxCommandEvent &) {
+  if (dataFile != NULL) {
+    wxString filename = wxFileSelector(
+      _("Nurodykite bylos pavadinimą"),
+      _(""),
+      _(""),
+      _(""),
+      _("*.txt"),
+      wxFD_SAVE | wxFD_OVERWRITE_PROMPT,
+      this
+    );
+
+    DataBlock * block =  dataFile->GetDataBlock(pos);
+    wxBeginBusyCursor();
+    block->Export(filename.mb_str());
+    wxEndBusyCursor();
+  } else {
+    wxMessageBox(_("Load a file first."));
+  }
+
 }
 
 void MainFrame::SetMargins(wxCommandEvent&) {

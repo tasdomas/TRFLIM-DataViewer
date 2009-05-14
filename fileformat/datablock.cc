@@ -257,3 +257,18 @@ void DataBlock::GetMarginZ(int & low, int & high) {
   low = z_low;
   high = z_high;
 }
+
+void DataBlock::Export(const char * filename) {
+  ofstream out;
+  out.open(filename);
+  out << "#x\ty\tt\tvalue" << endl;
+
+  for (int x = 0; x < GetX(); x++) {
+    for (int y = 0; y < GetY(); y++) {
+      for (int z = 0; z < GetZ(); z++) {
+        out <<  x << "\t" << y << "\t" << z << "\t" << GetPoint(x, y, z) << endl;
+      }
+    }
+  }
+  out.close();
+}

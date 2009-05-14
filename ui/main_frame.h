@@ -39,6 +39,7 @@ class MainFrame : public wxFrame {
     void ShowScale(wxCommandEvent&);
     void OnBlockSelect(wxCommandEvent& evt);
     void SetMargins(wxCommandEvent &);
+    void OnExport(wxCommandEvent &);
   private:
     int pos;
     DECLARE_EVENT_TABLE()

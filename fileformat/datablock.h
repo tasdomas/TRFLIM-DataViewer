@@ -4,6 +4,8 @@
 #include "typedef.h"
 
 #include <stdlib.h>
+#include <iostream>
+#include <fstream>
 #include <vector>
 
 using namespace std;
@@ -20,6 +22,8 @@ public:
   DataBlock(const DataBlock & origin);
   DataBlock & operator=(const DataBlock & origin);
   ~DataBlock();
+
+  void Export(const char * fname);
   
   uushort * GetImage(int z);
   uushort GetPoint(int x, int y, int z);

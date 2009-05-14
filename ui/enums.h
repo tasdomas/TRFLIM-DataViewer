@@ -4,6 +4,7 @@
 enum {
   ID_BlockNo = 1,
   ID_Margins,
+  ID_Export,
   ID_SetupBtn,
   ID_ZoomIn,
   ID_ZoomOut,

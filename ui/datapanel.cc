@@ -24,6 +24,8 @@ DataPanel::DataPanel(wxWindow * parent, wxWindowID id)
 
   wxButton * marginsBtn = new wxButton(this, ID_Margins, _("Set margins"));
   sizer->Add(marginsBtn, 0, wxEXPAND);
+  wxButton * exportButton = new wxButton(this, ID_Export, _("Export"));
+  sizer->Add(exportButton, 0, wxEXPAND);
 
   setupCtrl = new wxTextCtrl(this, ID_SetupBtn, _(""), 
                              wxDefaultPosition, wxDefaultSize,
