@@ -194,7 +194,7 @@ void ComponentBlock::DelinearizeData() {
         for (int x = 0; x < size_x; x++) {
           double val = C->element(i, x + y * size_x);
           block[i][x + y * size_x] = (unsigned short)floor(val);
-          cout << i << " " << (unsigned short)floor(val) << "\n";
+          //cout << i << " " << (unsigned short)floor(val) << "\n";
         }
       }
     }

@@ -4,3 +4,4 @@ rfc/*
 *~
 dv
 ui/dv_ui
+*.simple

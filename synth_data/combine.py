@@ -25,7 +25,7 @@ f.write('%d %d %d\n' % (dims[0], dims[1], 256))
 for x in range(0, dims[0]):
     for y in range(0, dims[1]):
         for z in range(0, 256):
-            value = pix1[x, y][0] * exp(-float(z) / tau1) + pix2[x, y][0] * exp(-float(z) / tau2)
+            value = pix1[x, y] * exp(-float(z) / tau1) + pix2[x, y] * exp(-float(z) / tau2)
 
             line = '%d %d %d %d \n' % (x, y, z, int(value))
 

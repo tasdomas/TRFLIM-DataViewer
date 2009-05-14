@@ -75,21 +75,25 @@ void DVCanvas::SetImage(DataBlock * block, int z) {
 
   image = new wxImage(block->GetX(), block->GetY(), true);
   uushort max = 0;
+
   for (int x = 0; x < block->GetX(); x++) {
     for (int y = 0; y < block->GetY(); y++) {
       uushort curr = block->GetPoint(x, y, z);
       if (curr > max) {
         max = curr;
       }
+
     }
   }
 
   if (max == 0) {
     max = 1;
   }
+
+
   for (int x = 0; x < block->GetX(); x++) {
     for (int y = 0; y < block->GetY(); y++) {
-      uushort curr = (block->GetPoint(x, y, z) * 255) / max ;
+      uushort curr = ((block->GetPoint(x, y, z)) * 255) / max ;
       image->SetRGB(x,y, curr, curr, curr);
     }
   }

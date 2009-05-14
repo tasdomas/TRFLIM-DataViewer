@@ -123,7 +123,7 @@ void CompDialog::OnSpin(wxSpinEvent& evt) {
       
       wxTextCtrl * text = new wxTextCtrl(this, wxID_ANY);
       lifetimes.push_back(text);
-      sizer->Insert(4+i, text);
+      sizer->Insert(5+i, text);
     }    
   }
   sizer->Layout();
