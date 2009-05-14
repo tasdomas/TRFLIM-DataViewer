@@ -13,15 +13,24 @@ void ComponentBlock::Compute(float sigma, int count, vector<float> & tau) {
   lifetimes = tau;
   sigma_t = sigma;
   components = count;
+  size_z = components;
+  ResetMargins();
 
   LinearizeData();
   if (sigma != 0.0) {
     ConstructIRF();
     RemoveIRF();
   }
+  //cout << setw(10) << setprecision(3) << *D << endl;
+
   CreateExponential();
+
+  //cout << setw(10) << setprecision(3) << *E << endl;
+
   InvertExponential();
   GetComponents();
+  NoNegativeValues();
+  //cout << setw(10) << setprecision(3) << *C << endl;
   DelinearizeData();
 }
 
@@ -117,12 +126,65 @@ void ComponentBlock::GetComponents() {
 
   }
 }
+
+void ComponentBlock::NoNegativeValues() {
+  if (C != NULL) {
+    double neg = 0.0;
+    double max = 0.0;
+    for (int i = 0; i < components; i++) {
+      for (int y = 0; y < size_y; y++) {
+        for (int x = 0; x < size_x; x++) {
+          double t = C->element(i, x + y * size_x);
+          if (C->element(i, x + y * size_x) < neg) {
+            neg = C->element(i, x + y * size_x);
+          }
+          if (C->element(i, x + y * size_x) > max) {
+            max = C->element(i, x + y * size_x);
+          }
+
+        }
+      }
+    }
+
+    if (max == 0.0) {
+      max = 1.0;
+    }
+    max = max - neg;
+
+    if (neg != 0.0) {
+      for (int i = 0; i < components; i++) {
+        for (int y = 0; y < size_y; y++) {
+          for (int x = 0; x < size_x; x++) {
+            double val = C->element(i, x + y * size_x);
+            val = ((val - neg) / max) * 60000;
+            C->element(i, x + y * size_x) = val;
+          }
+        }
+      }
+    }
+  }
+}
+    
   
 void ComponentBlock::DelinearizeData() {
 
   if (C != NULL) {
     delete [] block;
     block = new uushort*[components];
+    /*
+    double max = 0.0;
+    for (int i = 0; i < components; i++) {
+      for (int y = 0; y < size_y; y++) {
+        for (int x = 0; x < size_x; x++) {
+          double t = C->element(i, x + y * size_x);
+          if (C->element(i, x + y * size_x) > max) {
+            max = C->element(i, x + y * size_x);
+          }
+
+        }
+      }
+    }
+    */
     size_x = original->GetX();
     size_y = original->GetY();
     size_z = components;
@@ -130,7 +192,9 @@ void ComponentBlock::DelinearizeData() {
       block[i] = new uushort[size_x*size_y];
       for (int y = 0; y < size_y; y++) {
         for (int x = 0; x < size_x; x++) {
-          block[i][x + y * size_x] = C->element(i, x + y * size_x);
+          double val = C->element(i, x + y * size_x);
+          block[i][x + y * size_x] = (unsigned short)floor(val);
+          cout << i << " " << (unsigned short)floor(val) << "\n";
         }
       }
     }

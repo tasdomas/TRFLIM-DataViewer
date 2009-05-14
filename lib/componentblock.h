@@ -5,6 +5,11 @@
 #include "../include/newmat/newmat.h"
 #include "../include/newmat/newmatap.h"
 
+#include <iostream>
+#include <iomanip>
+#include "../include/newmat/newmatio.h"
+
+
 #include <math.h>
 #include <vector>
 
@@ -33,6 +38,7 @@ class ComponentBlock : public DataBlock {
   void CreateExponential();
   void InvertExponential();
   void GetComponents();
+  void NoNegativeValues();
   void DelinearizeData();
 
   Matrix * IRF;
