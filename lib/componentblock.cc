@@ -137,6 +137,7 @@ void ComponentBlock::NoNegativeValues() {
           double t = C->element(i, x + y * size_x);
           if (C->element(i, x + y * size_x) < neg) {
             neg = C->element(i, x + y * size_x);
+            C->element(i, x + y * size_x) = 0;
           }
           if (C->element(i, x + y * size_x) > max) {
             max = C->element(i, x + y * size_x);
@@ -149,14 +150,14 @@ void ComponentBlock::NoNegativeValues() {
     if (max == 0.0) {
       max = 1.0;
     }
-    max = max - neg;
+    //max = max - neg;
 
     if (neg != 0.0) {
       for (int i = 0; i < components; i++) {
         for (int y = 0; y < size_y; y++) {
           for (int x = 0; x < size_x; x++) {
             double val = C->element(i, x + y * size_x);
-            val = ((val - neg) / max) * 60000;
+            val = ((val) / max) * 60000;
             C->element(i, x + y * size_x) = val;
           }
         }

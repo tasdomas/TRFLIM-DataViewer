@@ -2,6 +2,7 @@
 
 BEGIN_EVENT_TABLE(GraphDialog, wxDialog)
 EVT_BUTTON(ID_GD_Fit, GraphDialog::OnFit)
+EVT_BUTTON(ID_GD_Save, GraphDialog::OnSave)
 END_EVENT_TABLE()
 
 
@@ -103,5 +104,20 @@ void GraphDialog::OnFit(wxCommandEvent &) {
     fit->SetDrawOutsideMargins(false);
     fit->SetContinuity(true);
     plot->Fit();
+  }
+}
+
+void GraphDialog::OnSave(wxCommandEvent &) {
+  wxString filename = wxFileSelector(
+    _("Nurodykite bylos pavadinimą"),
+    _(""),
+    _(""),
+    _(""),
+    _("*.png"),
+    wxFD_SAVE | wxFD_OVERWRITE_PROMPT,
+    this
+  ); 
+  if (! filename.empty()) {
+    plot->SaveScreenshot(filename, wxBITMAP_TYPE_PNG, wxDefaultSize, true);
   }
 }

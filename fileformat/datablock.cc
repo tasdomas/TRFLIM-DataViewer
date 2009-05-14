@@ -188,7 +188,10 @@ vector<float> DataBlock::GetPoint(int x, int y) {
 
 vector<float> DataBlock::GetTime(bool offset) {
   //remove offset if necessary
-
+  double mult = 1.0;
+  if (time_step < 1.0e-8) {
+    mult = 1.e9;
+  }
   double off = 0.0;
   if (offset) {
     off = 1.0;
@@ -196,7 +199,8 @@ vector<float> DataBlock::GetTime(bool offset) {
   if (GetZ() > 0) {
     vector<float> time;
     for (int z = 0; z < z_high - z_low; z++) {
-      time.push_back((z + off*z_low)*time_step);
+      double t = z + off*z_low;
+      time.push_back(t*time_step*mult);
     }
     return time;
   }

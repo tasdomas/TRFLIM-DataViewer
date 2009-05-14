@@ -18,6 +18,7 @@ class GraphDialog : public wxDialog {
   ~GraphDialog();
 
   void OnFit(wxCommandEvent &);
+  void OnSave(wxCommandEvent &);
 
   void SetGraph(vector<float> x, vector<float> y);
 
