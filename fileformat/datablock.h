@@ -28,6 +28,8 @@ public:
   uushort * GetImage(int z);
   uushort GetPoint(int x, int y, int z);
 
+  uushort GetMax();
+
   void SetData(uushort * data, int size);
   float GetTimeScale();
 
@@ -57,6 +59,9 @@ public:
 
 protected:
   uushort ** block;
+
+  uushort max;
+
   int size_x;
   int size_y;
   int size_z;

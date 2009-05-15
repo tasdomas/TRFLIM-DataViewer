@@ -27,6 +27,8 @@ DataBlock::DataBlock(uushort * data, int size, int scan_x, int scan_y, int adc_r
   y_high = size_y;
   z_high = size_z;
 
+  max = 0;
+
   time_step = time;
 }
 
@@ -44,6 +46,8 @@ DataBlock::DataBlock(int scan_x, int scan_y, int adc_res) {
   x_high = size_x;
   y_high = size_y;
   z_high = size_z;
+
+  max = 0;
   
 }
 
@@ -52,6 +56,8 @@ DataBlock::DataBlock() {
   size_x = size_y = size_z = 0;
   x_low = y_low = z_low = 0;
   x_high = y_high = z_high = 0;
+
+  max = 0;
 
   time_step = 0;
 }  
@@ -62,6 +68,7 @@ DataBlock::DataBlock(const DataBlock & origin) {
   size_y = origin.size_y;
   size_z = origin.size_z;
   time_step = origin.time_step;
+  max = origin.max;
 
   for (int i = 0; i < origin.size_z; i++) {
     uushort * at_z = new uushort[origin.size_x * origin.size_y];
@@ -88,6 +95,7 @@ DataBlock & DataBlock::operator=(const DataBlock & origin) {
   size_y = origin.size_y;
   size_z = origin.size_z;
   time_step = origin.time_step;
+  max = origin.max;
 
   for (int i = 0; i < origin.size_z; i++) {
     uushort * at_z = new uushort[origin.size_x * origin.size_y];
@@ -155,6 +163,7 @@ void DataBlock::SetData(uushort * data, int size) {
       }
     }
   }
+  max = 0;
 }
 
 uushort DataBlock::GetPoint(int x, int y, int z) {
@@ -211,6 +220,7 @@ void DataBlock::ResetMargins() {
   x_high = size_x;
   y_high = size_y;
   z_high = size_z;
+  max = 0;
 }
 
 void DataBlock::SetMarginX(int low, int high) {
@@ -220,6 +230,7 @@ void DataBlock::SetMarginX(int low, int high) {
   if ((low >= 0) && (high <= size_x)) {
     x_low = low;
     x_high = high;
+    max = 0;
   }
 }
 
@@ -230,6 +241,7 @@ void DataBlock::SetMarginY(int low, int high) {
   if ((low >= 0) && (high <= size_y)) {
     y_low = low;
     y_high = high;
+    max = 0;
   }
 }
                                     
@@ -240,6 +252,7 @@ void DataBlock::SetMarginZ(int low, int high) {
   if ((low >= 0) && (high <= size_z)) {
     z_low = low;
     z_high = high;
+    max = 0;
   }
 }
                                     
@@ -271,4 +284,19 @@ void DataBlock::Export(const char * filename) {
     }
   }
   out.close();
+}
+
+uushort DataBlock::GetMax() {
+  if (max == 0) {
+    for (int x = 0; x < GetX(); x++) {
+      for (int y = 0; y < GetY(); y++) {
+        for (int z = 0; z < GetZ(); z++) {
+          if (GetPoint(x, y, z) > max) {
+            max = GetPoint(x, y, z);
+          }
+        }
+      }
+    }
+  }
+  return max;
 }
