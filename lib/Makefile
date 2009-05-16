@@ -6,9 +6,11 @@ LIBFLAGS = -lm
 %.o : %.cc
 	$(COMPILER) $(CCFLAGS) -c $<
 
-objects = fwhmblock.o exception.o componentblock.o fitter.o
+objects = fwhmblock.o exception.o componentblock.o fitter.o svdblock.o
 
 all: $(objects) 
+
+svdblock.o: svdblock.o
 
 fitter.o: fitter.cc
 

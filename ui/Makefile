@@ -9,7 +9,7 @@ WX_CXXFLAGS = -W -Wall -g $(shell wx-config --cxxflags)
 
 INCLUDES = 
 
-OBJECTS = test_app.o app.o main_frame.o canvas.o datapanel.o imagepanel.o scaleframe.o grayscalepanel.o componentspanel.o compdialog.o graphdialog.o marginsdialog.o
+OBJECTS = test_app.o app.o main_frame.o canvas.o datapanel.o imagepanel.o scaleframe.o grayscalepanel.o componentspanel.o compdialog.o graphdialog.o marginsdialog.o svdpanel.o
 
 # implementation
 

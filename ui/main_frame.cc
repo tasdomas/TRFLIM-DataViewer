@@ -44,9 +44,11 @@ MainFrame::MainFrame()
     rawPanel = new GrayScalePanel(book, wxID_ANY, TRUE, TRUE);
     fwhmPanel = new GrayScalePanel(book, wxID_ANY, FALSE);    
     componentsPanel = new ComponentsPanel(book, wxID_ANY);
+    svdPanel = new SVDPanel(book, wxID_ANY);
 
     book->AddPage(rawPanel, _("Raw"), true);
     book->AddPage(fwhmPanel, _("FWHM"), false);
+    book->AddPage(svdPanel, _("SVD"), false);
     book->AddPage(componentsPanel, _("Comp"), false);
 
     sizer->Add(book, 2, wxEXPAND, 0);
@@ -125,6 +127,7 @@ void MainFrame::UpdateSDT(string fileName) {
   }
   fwhm = new FWHMBlock(dataFile->GetDataBlock(0));
   fwhmPanel->SetImage(fwhm);
+  svdPanel->SetImage(dataFile->GetDataBlock(0));
   
   componentsPanel->SetImage(dataFile->GetDataBlock(0));
 }
@@ -139,6 +142,7 @@ void MainFrame::OnBlockSelect(wxCommandEvent& evt) {
   }
   fwhm = new FWHMBlock(dataFile->GetDataBlock(pos));
   fwhmPanel->SetImage(fwhm);
+  svdPanel->SetImage(dataFile->GetDataBlock(pos));
   componentsPanel->SetImage(dataFile->GetDataBlock(pos));
 
   wxEndBusyCursor();
@@ -185,6 +189,7 @@ void MainFrame::SetMargins(wxCommandEvent&) {
     fwhm = new FWHMBlock(dataFile->GetDataBlock(pos));
     fwhmPanel->SetImage(fwhm);
     componentsPanel->SetImage(dataFile->GetDataBlock(pos));
+    svdPanel->SetImage(dataFile->GetDataBlock(pos));
   } else {
     wxMessageBox(_("Load a file first."));
   }

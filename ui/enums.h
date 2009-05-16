@@ -25,7 +25,8 @@ enum {
   ID_GD_Count,
   ID_GD_Fit,
   ID_GD_Save,
-  ID_GD_Export
+  ID_GD_Export,
+  ID_SVD_COMP
 };
 
 

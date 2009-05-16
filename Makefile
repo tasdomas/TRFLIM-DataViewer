@@ -19,9 +19,9 @@ MAIN_OBJECTS = main/main.o
 
 INCLUDE_OBJECTS = include/newmat/libnewmat.a include/wxMathPlot/mathplot.o include/lmfit/lmmin.o include/lmfit/lm_eval.o
 
-LIB_OBJECTS = lib/fwhmblock.o lib/exception.o lib/componentblock.o lib/fitter.o
+LIB_OBJECTS = lib/fwhmblock.o lib/exception.o lib/componentblock.o lib/fitter.o lib/svdblock.o
 
-UI_OBJECTS = ui/canvas.o ui/main_frame.o ui/datapanel.o ui/imagepanel.o ui/scaleframe.o ui/grayscalepanel.o ui/componentspanel.o ui/compdialog.o ui/graphdialog.o ui/marginsdialog.o
+UI_OBJECTS = ui/canvas.o ui/main_frame.o ui/datapanel.o ui/imagepanel.o ui/scaleframe.o ui/grayscalepanel.o ui/componentspanel.o ui/compdialog.o ui/graphdialog.o ui/marginsdialog.o ui/svdpanel.o
 
 OBJECTS = $(FILEFORMAT_OBJECTS) $(UI_OBJECTS) $(LIB_OBJECTS) $(INCLUDE_OBJECTS)
 
