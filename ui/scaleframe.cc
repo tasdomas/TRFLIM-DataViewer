@@ -17,9 +17,9 @@ ScaleFrame::ScaleFrame()
   wxImage img (200, 200, true);
   for (int x = 0; x  < 200; x++) {
     for (int y = 0; y < 200; y++) {
-      wxImage::HSVValue t (0.75 - 0.75*(float)x / 200,
+      wxImage::HSVValue t (0.75 - 0.75*(float)y / 200,
                            1.0,
-                           (float)y / 200
+                           1.0 - (float)x / 200
                            );
       wxImage::RGBValue tt = wxImage::HSVtoRGB(t);
       img.SetRGB(x, y, tt.red, tt.green, tt.blue);
